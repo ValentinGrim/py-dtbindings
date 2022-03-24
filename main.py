@@ -14,7 +14,6 @@ if __name__ == "__main__":
               if ".yaml" in file:
                   files_dict.update({file.split('.')[0] : dirpath + "/" + file})
 
-    #print(files_dict['non']) #except KeyError
     binding = []
     i = 0
     for key in sorted(files_dict):
