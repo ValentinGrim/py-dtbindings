@@ -1,0 +1,4 @@
+# sudo apt install swig python3 python3-ruamel.yaml
+dtschema
+rfc3987
+git+https://github.com/Julian/jsonschema.git
