@@ -1,5 +1,6 @@
 """
 @author Valentin Monnot
+@copyright 2022 - MIT License
 """
 import os, sys
 import yaml
