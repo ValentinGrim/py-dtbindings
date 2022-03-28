@@ -5,11 +5,86 @@ import os, sys
 import yaml
 import re
 
+props_key = ("oneOf", "anyOf", "allOf","const", "contains", "items", "enum")
 dtschema = os.path.expanduser("~/.local/lib/python3.8/site-packages/dtschema")
+
+class SDTBindings:
+    def __init__(self,path,verbose):
+        self._path = path
+        self._verbose = verbose
+
+        # Init path dict
+        self._files_dict = {}
+        for dirpath, _, filenames in os.walk(path):
+           if dirpath != path:
+              for file in filenames:
+                  if ".yaml" in file:
+                      self._files_dict.update({file.split('.')[0] : dirpath + "/" + file})
+
+        # Init compatible dict
+        if verbose > 2:
+            print("[INFO]: Initializing compatible dict...")
+        self._compat_dict = {}
+        for key in self._files_dict:
+            tmp = Binding(self._files_dict[key],self._files_dict,verbose)
+            try:
+                self._compat_extractor(key,tmp.properties.prop["compatible"])
+            except KeyError:
+                pass
+        if verbose > 2:
+            print("[INFO]: Compatible dict initialized !")
+
+    def _compat_extractor(self, key, compat):
+        global props_key
+        if type(compat) is str:
+            # If not vendor specific
+            if not "," in compat:
+                # Avoid process compat outside of it base bindings
+                if not compat in key:
+                    # Some compat like pwm-leds or gpio-leds are stored in
+                    # a file name that is reversed
+                    # e.g. pwm-leds is part of leds-pwm.yaml)
+                    if "-" in compat:
+                        if not "-" in key and compat.split("-")[1] == key:
+                            # Add to the list
+                            self._compat_dict.update({compat : self._files_dict[key]})
+                        elif all(x in key.split("-") for x in compat.split("-")):
+                            # Add to the list
+                            self._compat_dict.update({compat : self._files_dict[key]})
+                        elif key == "opp-v2": # The only one exception
+                            # Add to the list
+                            self._compat_dict.update({compat : self._files_dict[key]})
+                        else:
+                            # DO NOT add to the list
+                            pass
+                    else:
+                        # Add to the list
+                        self._compat_dict.update({compat : self._files_dict[key]})
+                else:
+                    # Add to the list
+                    self._compat_dict.update({compat : self._files_dict[key]})
+            else:
+                # Add to the list
+                self._compat_dict.update({compat : self._files_dict[key]})
+
+        elif type(compat) is dict:
+            for _key,value in compat.items():
+                if _key in props_key:
+                    self._compat_extractor(key,value)
+        elif type(compat) is list:
+            pass
+        else:
+            # We should never ever be there.
+            print("[ERR ]: Unknown compatible type", type(compat))
+            print(self._files_dict[key])
+            sys.exit(-1)
+
+    def get_binding(self, compatible):
+        return self._compat_dict[compatible]
 
 class Binding:
     def __init__(self, path, files_dict,verbose):
-        self.verbose = verbose
+        self._verbose = verbose
         self._path = path.rsplit('/',1)[0]
         self._files_dict = files_dict
         self.file_name = path.rsplit('/',1)[1]
@@ -59,10 +134,10 @@ class Binding:
                             name = name.rsplit('/',1)[0]
                             path = self._files_dict[name]
 
-                    if self.verbose > 2:
+                    if self._verbose > 2:
                         print("[INFO]: Binding <%s> loading $ref <%s>" % (self.file_name, path))
 
-                    self._refs.append(Binding(path,self._files_dict,self.verbose))
+                    self._refs.append(Binding(path,self._files_dict,self._verbose))
                 if 'if' in item:
                     self._if.append(item)
         except KeyError:
