@@ -60,3 +60,6 @@ wget-ed from https://www.kernel.org/doc/Documentation/devicetree/bindings/
 ## Contribute
   Feel free to improve this as you want and share it !
   Also I'm listening to any comments !
+  
+## Contact
+  - Valentin Monnot <vmonnot@outlook.com> 
