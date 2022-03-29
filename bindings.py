@@ -81,7 +81,7 @@ class SDTBindings:
             sys.exit(-1)
 
     def get_binding(self, compatible):
-        return self._compat_dict[compatible]
+        return return Binding(self._compat_dict[compatible],self._files_dict,self._verbose)
 
 class Binding:
     def __init__(self, path, files_dict,verbose):
