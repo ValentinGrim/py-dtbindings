@@ -5,6 +5,12 @@
 
 ## [Documentation](https://valentingrim.github.io/py-dtbindings/)
 
+## TODO :
+		- Update this readme !
+		- Complete _compat_extractor() in SDTBindings because of the rework of Prop
+		- Currently mySDTBindings.get_binding("gpio-keys") doesn't work because of above point
+
+
 ## Class
   ### SDTBindings
     This is the root class, this is the one that should be called.

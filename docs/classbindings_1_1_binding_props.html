@@ -22,7 +22,7 @@
  <tr style="height: 56px;">
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">py-dtbindings
-   &#160;<span id="projectnumber">0.3</span>
+   &#160;<span id="projectnumber">doc-v1.0</span>
    </div>
    <div id="projectbrief">This python &quot;lib&quot; aim is to extract devicetree bindings informations.</div>
   </td>
@@ -69,37 +69,122 @@ $(function() {
 <div class="header">
   <div class="summary">
 <a href="#pub-methods">Public Member Functions</a> &#124;
+<a href="#pri-methods">Private Member Functions</a> &#124;
+<a href="#pri-attribs">Private Attributes</a> &#124;
 <a href="classbindings_1_1_binding_props-members.html">List of all members</a>  </div>
   <div class="headertitle">
 <div class="title">bindings.BindingProps Class Reference</div>  </div>
 </div><!--header-->
 <div class="contents">
 
-<p>This class represent the binding properties of a <a class="el" href="classbindings_1_1_binding.html">Binding</a> class.  
+<p>This class represent the binding properties of a <a class="el" href="classbindings_1_1_binding.html" title="This class represent a binding document.">Binding</a> class.  
  <a href="classbindings_1_1_binding_props.html#details">More...</a></p>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:a530928dd9848225f5b2cc64e159db634"><td class="memItemLeft" align="right" valign="top"><a id="a530928dd9848225f5b2cc64e159db634"></a>
-def&#160;</td><td class="memItemRight" valign="bottom"><b>__init__</b> (self)</td></tr>
-<tr class="separator:a530928dd9848225f5b2cc64e159db634"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:abc10154460a49a214a0334538e8bb592"><td class="memItemLeft" align="right" valign="top">def&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classbindings_1_1_binding_props.html#abc10154460a49a214a0334538e8bb592">add_required</a> (self, required)</td></tr>
-<tr class="memdesc:abc10154460a49a214a0334538e8bb592"><td class="mdescLeft">&#160;</td><td class="mdescRight">Init or update self._required.  <a href="classbindings_1_1_binding_props.html#abc10154460a49a214a0334538e8bb592">More...</a><br /></td></tr>
+<tr class="memdesc:abc10154460a49a214a0334538e8bb592"><td class="mdescLeft">&#160;</td><td class="mdescRight">Init or update <a class="el" href="classbindings_1_1_binding_props.html#a1f84445dc68603c09a322645c15ac239">_required</a>.  <a href="classbindings_1_1_binding_props.html#abc10154460a49a214a0334538e8bb592">More...</a><br /></td></tr>
 <tr class="separator:abc10154460a49a214a0334538e8bb592"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a1a952ea01fde268daebf630f59b81dd8"><td class="memItemLeft" align="right" valign="top">def&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classbindings_1_1_binding_props.html#a1a952ea01fde268daebf630f59b81dd8">add_properties</a> (self, properties)</td></tr>
-<tr class="memdesc:a1a952ea01fde268daebf630f59b81dd8"><td class="mdescLeft">&#160;</td><td class="mdescRight">Init or update self._optional and _props.  <a href="classbindings_1_1_binding_props.html#a1a952ea01fde268daebf630f59b81dd8">More...</a><br /></td></tr>
+<tr class="memdesc:a1a952ea01fde268daebf630f59b81dd8"><td class="mdescLeft">&#160;</td><td class="mdescRight">Init or update <a class="el" href="classbindings_1_1_binding_props.html#a9a556496e492fabf294e86e6906db7e1">_optional</a> and _props.  <a href="classbindings_1_1_binding_props.html#a1a952ea01fde268daebf630f59b81dd8">More...</a><br /></td></tr>
 <tr class="separator:a1a952ea01fde268daebf630f59b81dd8"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a8e5cc55d80adfa43fc7dc30b136d03db"><td class="memItemLeft" align="right" valign="top"><a id="a8e5cc55d80adfa43fc7dc30b136d03db"></a>
 def&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classbindings_1_1_binding_props.html#a8e5cc55d80adfa43fc7dc30b136d03db">add_from_BindingProp</a> (self, prop)</td></tr>
-<tr class="memdesc:a8e5cc55d80adfa43fc7dc30b136d03db"><td class="mdescLeft">&#160;</td><td class="mdescRight">This function meant to be called to add properties of a $ref binding to the main Binding() <br /></td></tr>
+<tr class="memdesc:a8e5cc55d80adfa43fc7dc30b136d03db"><td class="mdescLeft">&#160;</td><td class="mdescRight">This function meant to be called to add properties of a $ref binding to the main <a class="el" href="classbindings_1_1_binding.html" title="This class represent a binding document.">Binding</a>. <br /></td></tr>
 <tr class="separator:a8e5cc55d80adfa43fc7dc30b136d03db"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a85b58ecf6742e43496d43d2c3b61d5bd"><td class="memItemLeft" align="right" valign="top">def&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classbindings_1_1_binding_props.html#a85b58ecf6742e43496d43d2c3b61d5bd">prop_from_name</a> (self, name)</td></tr>
-<tr class="memdesc:a85b58ecf6742e43496d43d2c3b61d5bd"><td class="mdescLeft">&#160;</td><td class="mdescRight">Explicit : return a <a class="el" href="classbindings_1_1_prop.html" title="This NamedTuple represent a single poperty and its value(s)">Prop</a> for a given name.  <a href="classbindings_1_1_binding_props.html#a85b58ecf6742e43496d43d2c3b61d5bd">More...</a><br /></td></tr>
+<tr class="memdesc:a85b58ecf6742e43496d43d2c3b61d5bd"><td class="mdescLeft">&#160;</td><td class="mdescRight">Explicit : return a <a class="el" href="classbindings_1_1_prop.html" title="This NamedTuple represent a single property and its value(s)">Prop</a> for a given name.  <a href="classbindings_1_1_binding_props.html#a85b58ecf6742e43496d43d2c3b61d5bd">More...</a><br /></td></tr>
 <tr class="separator:a85b58ecf6742e43496d43d2c3b61d5bd"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pri-methods"></a>
+Private Member Functions</h2></td></tr>
+<tr class="memitem:af3d16b487f9cc6a6544cab287ad1568f"><td class="memItemLeft" align="right" valign="top">def&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classbindings_1_1_binding_props.html#af3d16b487f9cc6a6544cab287ad1568f">_update</a> (self)</td></tr>
+<tr class="memdesc:af3d16b487f9cc6a6544cab287ad1568f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Did some cleaning on <a class="el" href="classbindings_1_1_binding_props.html#a9a556496e492fabf294e86e6906db7e1">_optional</a> list after update.  <a href="classbindings_1_1_binding_props.html#af3d16b487f9cc6a6544cab287ad1568f">More...</a><br /></td></tr>
+<tr class="separator:af3d16b487f9cc6a6544cab287ad1568f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af35096c0dbb226e3e22318076bb5f439"><td class="memItemLeft" align="right" valign="top">def&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classbindings_1_1_binding_props.html#af35096c0dbb226e3e22318076bb5f439">_value_analyzer</a> (self, item)</td></tr>
+<tr class="memdesc:af35096c0dbb226e3e22318076bb5f439"><td class="mdescLeft">&#160;</td><td class="mdescRight">Analyze value type of input and process it.  <a href="classbindings_1_1_binding_props.html#af35096c0dbb226e3e22318076bb5f439">More...</a><br /></td></tr>
+<tr class="separator:af35096c0dbb226e3e22318076bb5f439"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pri-attribs"></a>
+Private Attributes</h2></td></tr>
+<tr class="memitem:a3650611dedfdec1cc5ec1dae66be645a"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classbindings_1_1_binding_props.html#a3650611dedfdec1cc5ec1dae66be645a">_props</a></td></tr>
+<tr class="separator:a3650611dedfdec1cc5ec1dae66be645a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1f84445dc68603c09a322645c15ac239"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classbindings_1_1_binding_props.html#a1f84445dc68603c09a322645c15ac239">_required</a></td></tr>
+<tr class="separator:a1f84445dc68603c09a322645c15ac239"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9a556496e492fabf294e86e6906db7e1"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classbindings_1_1_binding_props.html#a9a556496e492fabf294e86e6906db7e1">_optional</a></td></tr>
+<tr class="separator:a9a556496e492fabf294e86e6906db7e1"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><p>This class represent the binding properties of a <a class="el" href="classbindings_1_1_binding.html">Binding</a> class. </p>
+<div class="textblock"><p>This class represent the binding properties of a <a class="el" href="classbindings_1_1_binding.html" title="This class represent a binding document.">Binding</a> class. </p>
 </div><h2 class="groupheader">Member Function Documentation</h2>
+<a id="af3d16b487f9cc6a6544cab287ad1568f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af3d16b487f9cc6a6544cab287ad1568f">&#9670;&nbsp;</a></span>_update()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">def bindings.BindingProps._update </td>
+          <td>(</td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname"><em>self</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Did some cleaning on <a class="el" href="classbindings_1_1_binding_props.html#a9a556496e492fabf294e86e6906db7e1">_optional</a> list after update. </p>
+<p>After adding new elements to <a class="el" href="classbindings_1_1_binding_props.html#a9a556496e492fabf294e86e6906db7e1">_optional</a>, check if these elements can be found in <a class="el" href="classbindings_1_1_binding_props.html#a1f84445dc68603c09a322645c15ac239">_required</a>, and so, remove them from <a class="el" href="classbindings_1_1_binding_props.html#a9a556496e492fabf294e86e6906db7e1">_optional</a> </p>
+
+</div>
+</div>
+<a id="af35096c0dbb226e3e22318076bb5f439"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af35096c0dbb226e3e22318076bb5f439">&#9670;&nbsp;</a></span>_value_analyzer()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">def bindings.BindingProps._value_analyzer </td>
+          <td>(</td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname"><em>self</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname"><em>item</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Analyze value type of input and process it. </p>
+<p>It should be called for extract necessary info for <a class="el" href="classbindings_1_1_binding_props.html#a3650611dedfdec1cc5ec1dae66be645a">_props</a> It ceate some <a class="el" href="classbindings_1_1_prop.html" title="This NamedTuple represent a single property and its value(s)">Prop</a> or list of <a class="el" href="classbindings_1_1_prop.html" title="This NamedTuple represent a single property and its value(s)">Prop</a> or simply return a var that should be added to the main <a class="el" href="classbindings_1_1_prop.html" title="This NamedTuple represent a single property and its value(s)">Prop</a> value </p>
+
+</div>
+</div>
 <a id="a1a952ea01fde268daebf630f59b81dd8"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a1a952ea01fde268daebf630f59b81dd8">&#9670;&nbsp;</a></span>add_properties()</h2>
 
@@ -126,10 +211,10 @@ def&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class
       </table>
 </div><div class="memdoc">
 
-<p>Init or update self._optional and _props. </p>
+<p>Init or update <a class="el" href="classbindings_1_1_binding_props.html#a9a556496e492fabf294e86e6906db7e1">_optional</a> and _props. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">properties</td><td>A dict usually extracted from self._content of <a class="el" href="classbindings_1_1_binding.html">Binding</a> </td></tr>
+    <tr><td class="paramname">properties</td><td>A dict usually extracted from <a class="el" href="classbindings_1_1_binding.html#a915003674a0fdcc8384d9332d023fa4b">Binding._content</a> </td></tr>
   </table>
   </dd>
 </dl>
@@ -162,10 +247,10 @@ def&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class
       </table>
 </div><div class="memdoc">
 
-<p>Init or update self._required. </p>
+<p>Init or update <a class="el" href="classbindings_1_1_binding_props.html#a1f84445dc68603c09a322645c15ac239">_required</a>. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">required</td><td>A list usually extracted from self._content of <a class="el" href="classbindings_1_1_binding.html">Binding</a> </td></tr>
+    <tr><td class="paramname">required</td><td>A list usually extracted from <a class="el" href="classbindings_1_1_binding.html#a915003674a0fdcc8384d9332d023fa4b">Binding._content</a> </td></tr>
   </table>
   </dd>
 </dl>
@@ -198,14 +283,84 @@ def&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class
       </table>
 </div><div class="memdoc">
 
-<p>Explicit : return a <a class="el" href="classbindings_1_1_prop.html" title="This NamedTuple represent a single poperty and its value(s)">Prop</a> for a given name. </p>
+<p>Explicit : return a <a class="el" href="classbindings_1_1_prop.html" title="This NamedTuple represent a single property and its value(s)">Prop</a> for a given name. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">name</td><td>Name of the desired props </td></tr>
+    <tr><td class="paramname">name</td><td>Name of the desired <a class="el" href="classbindings_1_1_prop.html" title="This NamedTuple represent a single property and its value(s)">Prop</a> </td></tr>
   </table>
   </dd>
 </dl>
-<dl class="section return"><dt>Returns</dt><dd>A <a class="el" href="classbindings_1_1_prop.html" title="This NamedTuple represent a single poperty and its value(s)">Prop</a> item or None </dd></dl>
+<dl class="section return"><dt>Returns</dt><dd>A <a class="el" href="classbindings_1_1_prop.html" title="This NamedTuple represent a single property and its value(s)">Prop</a> item or None </dd></dl>
+
+</div>
+</div>
+<h2 class="groupheader">Member Data Documentation</h2>
+<a id="a9a556496e492fabf294e86e6906db7e1"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9a556496e492fabf294e86e6906db7e1">&#9670;&nbsp;</a></span>_optional</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">bindings.BindingProps._optional</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p>A list of all optional properties </p>
+
+</div>
+</div>
+<a id="a3650611dedfdec1cc5ec1dae66be645a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3650611dedfdec1cc5ec1dae66be645a">&#9670;&nbsp;</a></span>_props</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">def bindings.BindingProps._props</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p>A dict Contains properties formatted with <a class="el" href="classbindings_1_1_prop.html" title="This NamedTuple represent a single property and its value(s)">Prop</a> </p>
+
+</div>
+</div>
+<a id="a1f84445dc68603c09a322645c15ac239"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a1f84445dc68603c09a322645c15ac239">&#9670;&nbsp;</a></span>_required</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">bindings.BindingProps._required</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p>A list of all required properties </p>
 
 </div>
 </div>

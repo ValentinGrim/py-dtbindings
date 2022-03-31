@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['sdtbindings_8',['SDTBindings',['../classbindings_1_1_s_d_t_bindings.html',1,'bindings']]]
+  ['examples_21',['examples',['../classbindings_1_1_binding.html#a99987b7e4e898a5642636de256b8fbdb',1,'bindings::Binding']]]
 ];

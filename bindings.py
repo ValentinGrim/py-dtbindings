@@ -10,13 +10,41 @@ from typing import NamedTuple, Any
 props_key = ("oneOf", "anyOf", "allOf","const", "contains", "items", "enum")
 dtschema = os.path.expanduser("~/.local/lib/python3.8/site-packages/dtschema")
 
+##
+#	@class		SDTBindings
+#	@brief		The main class that you should call
+#	~~~~~~~~~~~~~~~~~~~~~
+#	# This exemple will print required for i2c-mux-pinctrl
+#	from bindings import SDTBindings
+#	if __name__ == "__main__":
+#		myPath = "./devicetree/bindings"
+#		mySDT = SDTBindings(myPath,0)
+#
+#		# Retrieve a Binding() by its name
+#		myBinding = mySDT.get_binding("i2c-mux-pinctrl")
+#
+#		print(myBinding.required())
+#	~~~~~~~~~~~~~~~~~~~~~
 class SDTBindings:
 	def __init__(self,path,verbose):
-		self._path = path
-		self._verbose = verbose
+		##
+		#	@var		_path
+		#	@brief		Internal reference to rootdir of bindings
+		self._path 			= path
+		##
+		#	@var		_verbose
+		#	@brief		Internal reference for printing debug level (0 to 3)
+		self._verbose 		= verbose
+		##
+		#	@var		_files_dict
+		#	@brief		Internal dict where key are filename without extension (e.g. serial)\n
+		#				value are complet path to these file
+		self._files_dict 	 = {}
+		##
+		#	@var		_compat_dict
+		#	@brief		Internal reference similar to #_files_dict but keys are 'compatible'
+		self._compat_dict	= {}
 
-		# Init path dict
-		self._files_dict = {}
 		for dirpath, _, filenames in os.walk(path):
 			if dirpath != path:
 				for file in filenames:
@@ -26,72 +54,101 @@ class SDTBindings:
 		# Init compatible dict
 		if verbose > 2:
 			print("[INFO]: Initializing compatible dict...")
-		self._compat_dict = {}
+
 		for key in self._files_dict:
 			tmp = Binding(self._files_dict[key],self._files_dict,verbose)
 			try:
-				self._compat_extractor(key,tmp.properties.prop["compatible"])
+				self._compat_extractor(key,tmp.get_prop_by_name("compatible").value)
 			except AttributeError:
 				pass
+
+		print(self._compat_dict)
 		if verbose > 2:
 			print("[INFO]: Compatible dict initialized !")
 
+	##
+	#	@fn			_compat_extractor(self, key, compat)
+	#	@brief		Extract compatible node from properties and
+	#				init a dict like #_files_dict to access path through compatible
+	#	@todo		About all since a reworked Prop
 	def _compat_extractor(self, key, compat):
-		global props_key
-		if type(compat) is str:
-			# If not vendor specific
-			if not "," in compat:
-				# Avoid process compat outside of it base bindings
-				if not compat in key:
-					# Some compat like pwm-leds or gpio-leds are stored in
-					# a file name that is reversed
-					# e.g. pwm-leds is part of leds-pwm.yaml)
-					if "-" in compat:
-						if not "-" in key and compat.split("-")[1] == key:
-							# Add to the list
-							self._compat_dict.update({compat : self._files_dict[key]})
-						elif all(x in key.split("-") for x in compat.split("-")):
-							# Add to the list
-							self._compat_dict.update({compat : self._files_dict[key]})
-						elif key == "opp-v2": # The only one exception
-							# Add to the list
-							self._compat_dict.update({compat : self._files_dict[key]})
-						else:
-							# DO NOT add to the list
-							pass
-					else:
-						# Add to the list
-						self._compat_dict.update({compat : self._files_dict[key]})
-				else:
-					# Add to the list
-					self._compat_dict.update({compat : self._files_dict[key]})
-			else:
-				# Add to the list
-				self._compat_dict.update({compat : self._files_dict[key]})
+		if isinstance(compat, Prop):
+			if compat.name == 'const':
+				self._compat_dict.update({compat.value : self._files_dict[key]})
 
-		elif type(compat) is dict:
-			for _key,value in compat.items():
-				if _key in props_key:
-					self._compat_extractor(key,value)
-		elif type(compat) is list:
-			pass
+			else:
+				print(compat)
+				print("\n")
+
 		else:
-			# We should never ever be there.
-			print("[ERR ]: Unknown compatible type", type(compat))
-			print(self._files_dict[key])
-			sys.exit(-1)
+			if type(compat) is str:
+				self._compat_dict.update({compat : self._files_dict[key]})
 
 	def get_binding(self, compatible):
 		return Binding(self._compat_dict[compatible],self._files_dict,self._verbose)
 
 ##
 #	@class		Binding
+#	@brief		This class represent a binding document
 class Binding:
 	def __init__(self, path, files_dict,verbose):
-		self._verbose = verbose
-		self._path = path.rsplit('/',1)[0]
+		##
+		#	@var	_verbose
+		#	Internal reference for printing debug level (0 to 3)
+		self._verbose 	= verbose
+		##
+		#	@var	_path
+		#	Internal reference for path of the main file
+		self._path 		= path.rsplit('/',1)[0]
+		##
+		#	@var	_files_dict
+		#	Internal reference on all YAML path in root dir. Given by SDTBindings
 		self._files_dict = files_dict
-		self.file_name = path.rsplit('/',1)[1]
+		##
+		#	@var	_content
+		#	Internal pointer on loaded yaml
+		self._content	= None
+		##
+		#	@var	_file
+		#	Internal file pointer
+		self._file		 = None
+		##
+		#	@var	_refs
+		#	Internal reference on Binding included by $ref in allOf node
+		self._refs 		= []
+		##
+		#	@var	_if
+		#	Internal reference on if node from allOf node (currently unused)
+		self._if 		= []
+		##
+		#	@var	_props
+		#	Internal reference on BindingProps containing properties information
+		self._props 	= BindingProps()
+
+		##
+		#	@var	file_name
+		#	The YAML file name represented by this class
+		self.file_name	 	 = path.rsplit('/',1)[1]
+		##
+		#	@var	id
+		#	Usually kernel.org link to this binding
+		self.id				= ""
+		##
+		#	@var	schema
+		#	dt-schema used as base for this binding
+		self.schema			= ""
+		##
+		#	@var	maintainers
+		#	Maintainers of this bindings
+		self.maintainers	= ""
+		##
+		#	@var	title
+		#	Title of this bindings
+		self.title			= ""
+		##
+		#	@var	examples
+		#	If maintainers did some, you can find dts node examples here
+		self.examples		= ""
 
 		global dtschema
 
@@ -110,14 +167,8 @@ class Binding:
 		self.maintainers = self._content['maintainers']
 		self.title = self._content['title']
 
-		# Init allOf and load $ref bindings if exist
-		self._refs = []
-		self._if = []
-
-		# Initializing allOf node
+		# Initializing allOf node and properties
 		self._init_allOf()
-
-		self._props = BindingProps()
 		self._init_Properties()
 
 		try:
@@ -126,6 +177,9 @@ class Binding:
 			if verbose > 2:
 				print("[INFO]: No examples found for ", self.file_name)
 
+	##
+	#	@fn			_init_allOf(self)
+	#	@brief		Init #_refs
 	def _init_allOf(self):
 		try:
 			for item in self._content['allOf']:
@@ -178,9 +232,9 @@ class Binding:
 
 	##
 	#	@fn			_init_Properties(self)
-	#	@brief		Init self._props which is basically a BindingProps item
-	#	@details	Exctract required list from self_.content and call
-	#				BindingProps add_required() function
+	#	@brief		Init #_props which is basically a BindingProps item
+	#	@details	Exctract required list from #_content and call
+	#				BindingProps.add_required() function
 	def _init_Properties(self):
 		# Extract required node
 		if self._verbose > 2:
@@ -208,13 +262,36 @@ class Binding:
 		if self._verbose > 2:
 			print("[INFO]: Properties initialized for ", self.file_name)
 
+	##
+	#	@fn			get_prop_by_name(self, name)
+	#	@brief		The clean way to retrieve a property from BindingProps
+	#	@param		name	Name of the desired props
+	#	@return		A Prop item or None
+	def get_prop_by_name(self, name):
+		return self._props.prop_from_name(name)
+
+	##
+	#	@fn			required(self)
+	#	@brief		The clean way to retrieve BindingProps._required
+	#	@return		BindingProps._required
+	def required(self):
+		return self._props._required
+
+	##
+	#	@fn			optional(self)
+	#	@brief		The clean way to retrieve BindingProps._optional
+	#	@return		BindingProps._optional
+	def optional(self):
+		return self._props._optional
 
 ##
 #	@class 		Prop
 #	@memberof	NamedTuple
-#	@brief		This NamedTuple represent a single poperty and its value(s)
-#	@var		str	name	Property name
-#	@var		any	value	Value(s) of the properties
+#	@brief		This NamedTuple represent a single property and its value(s)
+#	@details	As NamedTuple var can't be detected by doxygen, here it's how it work:\n
+#				Prop is like a C struct, with 2 field:\n
+#				* Prop.name 	-> The name of the property\n
+#				* Prop.value 	-> Value(s) of the property
 class Prop(NamedTuple):
 	name: str
 	value: Any
@@ -223,18 +300,25 @@ class Prop(NamedTuple):
 ##
 #	@class		BindingProps
 #	@brief		This class represent the binding properties of a Binding class
-#	@var		dict	_props		Contains properties formatted with Prop
-#	@var		list	_required	A list of all required properties
-#	@var		list	_optional	A list of all optional properties
 class BindingProps:
 	def __init__(self):
+		##
+		#	@var	_props
+		#	A dict Contains properties formatted with Prop
 		self._props = {}
+		##
+		#	@var	_required
+		#	A list of all required properties
 		self._required = []
+		##
+		#	@var	_optional
+		#	A list of all optional properties
 		self._optional = []
+
 	##
 	#	@fn			add_required(self, required)
-	#	@brief		Init or update self._required
-	#	@param		required	A list usually extracted from self._content of Binding
+	#	@brief		Init or update #_required
+	#	@param		required	A list usually extracted from \link Binding._content \endlink
 	def add_required(self, required):
 		if not required:
 			return
@@ -247,8 +331,8 @@ class BindingProps:
 
 	##
 	#	@fn			add_properties(self, properties)
-	#	@brief		Init or update self._optional and _props
-	#	@param		properties	A dict usually extracted from self._content of Binding
+	#	@brief		Init or update #_optional and _props
+	#	@param		properties	A dict usually extracted from \link Binding._content \endlink
 	def add_properties(self, properties):
 		if not properties:
 			return
@@ -265,7 +349,7 @@ class BindingProps:
 	##
 	#	@fn			add_from_BindingProp(self, prop)
 	#	@brief		This function meant to be called to add properties of a
-	#				$ref binding to the main Binding()
+	#				$ref binding to the main Binding
 	def add_from_BindingProp(self, prop):
 		self._required += prop._required
 		# Remove duplicates
@@ -281,7 +365,7 @@ class BindingProps:
 	##
 	#	@fn			prop_from_name(self, name)
 	#	@brief		Explicit : return a Prop for a given name
-	#	@param		name	Name of the desired props
+	#	@param		name	Name of the desired Prop
 	#	@return		A Prop item or None
 	def prop_from_name(self, name):
 		try:
@@ -291,10 +375,10 @@ class BindingProps:
 
 	##
 	#	@fn			_update(self)
-	#	@brief		Did some cleaning on optional list after update
-	#	@details	After adding new elements to the optional list, check if these
-	#				elements can be found in the required list, and so, remove them
-	#				from the optional list
+	#	@brief		Did some cleaning on #_optional list after update
+	#	@details	After adding new elements to #_optional, check if these
+	#				elements can be found in #_required, and so, remove them
+	#				from #_optional
 	def _update(self):
 		if self._required:
 			self._optional = [item for item in self._optional if item not in self._required]
@@ -302,9 +386,9 @@ class BindingProps:
 	##
 	#	@fn			_value_analyzer(self, item)
 	#	@brief		Analyze value type of input and process it
-	#	@details	It should be called for extract necessary info for self_.props
-	#				It ceate some Prop() or list of Prop() or simply return a var
-	#				that should be added to the main Prop() value
+	#	@details	It should be called for extract necessary info for #_props
+	#				It ceate some Prop or list of Prop or simply return a var
+	#				that should be added to the main Prop value
 	def _value_analyzer(self, item):
 		if type(item) != dict:
 			return item

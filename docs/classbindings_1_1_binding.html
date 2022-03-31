@@ -22,7 +22,7 @@
  <tr style="height: 56px;">
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">py-dtbindings
-   &#160;<span id="projectnumber">0.3</span>
+   &#160;<span id="projectnumber">doc-v1.0</span>
    </div>
    <div id="projectbrief">This python &quot;lib&quot; aim is to extract devicetree bindings informations.</div>
   </td>
@@ -70,39 +70,459 @@ $(function() {
   <div class="summary">
 <a href="#pub-methods">Public Member Functions</a> &#124;
 <a href="#pub-attribs">Public Attributes</a> &#124;
+<a href="#pri-methods">Private Member Functions</a> &#124;
+<a href="#pri-attribs">Private Attributes</a> &#124;
 <a href="classbindings_1_1_binding-members.html">List of all members</a>  </div>
   <div class="headertitle">
 <div class="title">bindings.Binding Class Reference</div>  </div>
 </div><!--header-->
 <div class="contents">
+
+<p>This class represent a binding document.  
+ <a href="classbindings_1_1_binding.html#details">More...</a></p>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:a96169f80571de434c11535a8d10d6238"><td class="memItemLeft" align="right" valign="top"><a id="a96169f80571de434c11535a8d10d6238"></a>
-def&#160;</td><td class="memItemRight" valign="bottom"><b>__init__</b> (self, path, files_dict, verbose)</td></tr>
-<tr class="separator:a96169f80571de434c11535a8d10d6238"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4191e5728779b38e112e3ad4367eddf0"><td class="memItemLeft" align="right" valign="top">def&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classbindings_1_1_binding.html#a4191e5728779b38e112e3ad4367eddf0">get_prop_by_name</a> (self, name)</td></tr>
+<tr class="memdesc:a4191e5728779b38e112e3ad4367eddf0"><td class="mdescLeft">&#160;</td><td class="mdescRight">The clean way to retrieve a property from <a class="el" href="classbindings_1_1_binding_props.html" title="This class represent the binding properties of a Binding class.">BindingProps</a>.  <a href="classbindings_1_1_binding.html#a4191e5728779b38e112e3ad4367eddf0">More...</a><br /></td></tr>
+<tr class="separator:a4191e5728779b38e112e3ad4367eddf0"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1320297716bc79b02550476cc6c49e5a"><td class="memItemLeft" align="right" valign="top">def&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classbindings_1_1_binding.html#a1320297716bc79b02550476cc6c49e5a">required</a> (self)</td></tr>
+<tr class="memdesc:a1320297716bc79b02550476cc6c49e5a"><td class="mdescLeft">&#160;</td><td class="mdescRight">The clean way to retrieve <a class="el" href="classbindings_1_1_binding_props.html#a1f84445dc68603c09a322645c15ac239">BindingProps._required</a>.  <a href="classbindings_1_1_binding.html#a1320297716bc79b02550476cc6c49e5a">More...</a><br /></td></tr>
+<tr class="separator:a1320297716bc79b02550476cc6c49e5a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa3f90e6d63934dbba00928347b02c387"><td class="memItemLeft" align="right" valign="top">def&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classbindings_1_1_binding.html#aa3f90e6d63934dbba00928347b02c387">optional</a> (self)</td></tr>
+<tr class="memdesc:aa3f90e6d63934dbba00928347b02c387"><td class="mdescLeft">&#160;</td><td class="mdescRight">The clean way to retrieve <a class="el" href="classbindings_1_1_binding_props.html#a9a556496e492fabf294e86e6906db7e1">BindingProps._optional</a>.  <a href="classbindings_1_1_binding.html#aa3f90e6d63934dbba00928347b02c387">More...</a><br /></td></tr>
+<tr class="separator:aa3f90e6d63934dbba00928347b02c387"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-attribs"></a>
 Public Attributes</h2></td></tr>
-<tr class="memitem:a53ad1ee62a15fd802b0ba1006ebb5d04"><td class="memItemLeft" align="right" valign="top"><a id="a53ad1ee62a15fd802b0ba1006ebb5d04"></a>
-&#160;</td><td class="memItemRight" valign="bottom"><b>file_name</b></td></tr>
+<tr class="memitem:a53ad1ee62a15fd802b0ba1006ebb5d04"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classbindings_1_1_binding.html#a53ad1ee62a15fd802b0ba1006ebb5d04">file_name</a></td></tr>
 <tr class="separator:a53ad1ee62a15fd802b0ba1006ebb5d04"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a8f095f37961c7e41b351cfe7651722ef"><td class="memItemLeft" align="right" valign="top"><a id="a8f095f37961c7e41b351cfe7651722ef"></a>
-&#160;</td><td class="memItemRight" valign="bottom"><b>id</b></td></tr>
+<tr class="memitem:a8f095f37961c7e41b351cfe7651722ef"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classbindings_1_1_binding.html#a8f095f37961c7e41b351cfe7651722ef">id</a></td></tr>
 <tr class="separator:a8f095f37961c7e41b351cfe7651722ef"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aa63b422adce42d279e32a9e20b792e33"><td class="memItemLeft" align="right" valign="top"><a id="aa63b422adce42d279e32a9e20b792e33"></a>
-&#160;</td><td class="memItemRight" valign="bottom"><b>schema</b></td></tr>
+<tr class="memitem:aa63b422adce42d279e32a9e20b792e33"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classbindings_1_1_binding.html#aa63b422adce42d279e32a9e20b792e33">schema</a></td></tr>
 <tr class="separator:aa63b422adce42d279e32a9e20b792e33"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a0d22ac9e24ab38ae8a90c3e306e83a2e"><td class="memItemLeft" align="right" valign="top"><a id="a0d22ac9e24ab38ae8a90c3e306e83a2e"></a>
-&#160;</td><td class="memItemRight" valign="bottom"><b>maintainers</b></td></tr>
+<tr class="memitem:a0d22ac9e24ab38ae8a90c3e306e83a2e"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classbindings_1_1_binding.html#a0d22ac9e24ab38ae8a90c3e306e83a2e">maintainers</a></td></tr>
 <tr class="separator:a0d22ac9e24ab38ae8a90c3e306e83a2e"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a4c9f2642449a0fd6d79abf82f3101caf"><td class="memItemLeft" align="right" valign="top"><a id="a4c9f2642449a0fd6d79abf82f3101caf"></a>
-&#160;</td><td class="memItemRight" valign="bottom"><b>title</b></td></tr>
+<tr class="memitem:a4c9f2642449a0fd6d79abf82f3101caf"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classbindings_1_1_binding.html#a4c9f2642449a0fd6d79abf82f3101caf">title</a></td></tr>
 <tr class="separator:a4c9f2642449a0fd6d79abf82f3101caf"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a99987b7e4e898a5642636de256b8fbdb"><td class="memItemLeft" align="right" valign="top"><a id="a99987b7e4e898a5642636de256b8fbdb"></a>
-&#160;</td><td class="memItemRight" valign="bottom"><b>examples</b></td></tr>
+<tr class="memitem:a99987b7e4e898a5642636de256b8fbdb"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classbindings_1_1_binding.html#a99987b7e4e898a5642636de256b8fbdb">examples</a></td></tr>
 <tr class="separator:a99987b7e4e898a5642636de256b8fbdb"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pri-methods"></a>
+Private Member Functions</h2></td></tr>
+<tr class="memitem:a00ee437af79a49c61f4f74828bfae4b5"><td class="memItemLeft" align="right" valign="top"><a id="a00ee437af79a49c61f4f74828bfae4b5"></a>
+def&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classbindings_1_1_binding.html#a00ee437af79a49c61f4f74828bfae4b5">_init_allOf</a> (self)</td></tr>
+<tr class="memdesc:a00ee437af79a49c61f4f74828bfae4b5"><td class="mdescLeft">&#160;</td><td class="mdescRight">Init <a class="el" href="classbindings_1_1_binding.html#a47940ced2c58b9f9b3db52b7986682c3">_refs</a>. <br /></td></tr>
+<tr class="separator:a00ee437af79a49c61f4f74828bfae4b5"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab02b256080ea8f95ab15d87fda4aae12"><td class="memItemLeft" align="right" valign="top">def&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classbindings_1_1_binding.html#ab02b256080ea8f95ab15d87fda4aae12">_init_Properties</a> (self)</td></tr>
+<tr class="memdesc:ab02b256080ea8f95ab15d87fda4aae12"><td class="mdescLeft">&#160;</td><td class="mdescRight">Init <a class="el" href="classbindings_1_1_binding.html#a2cc4fce7df29b3b3d86691bd12302bd3">_props</a> which is basically a <a class="el" href="classbindings_1_1_binding_props.html" title="This class represent the binding properties of a Binding class.">BindingProps</a> item.  <a href="classbindings_1_1_binding.html#ab02b256080ea8f95ab15d87fda4aae12">More...</a><br /></td></tr>
+<tr class="separator:ab02b256080ea8f95ab15d87fda4aae12"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pri-attribs"></a>
+Private Attributes</h2></td></tr>
+<tr class="memitem:a1f089794a1da770a21d174ca31b7d64b"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classbindings_1_1_binding.html#a1f089794a1da770a21d174ca31b7d64b">_verbose</a></td></tr>
+<tr class="separator:a1f089794a1da770a21d174ca31b7d64b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5ba8e4de5927bb93bfe943518fc6db93"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classbindings_1_1_binding.html#a5ba8e4de5927bb93bfe943518fc6db93">_path</a></td></tr>
+<tr class="separator:a5ba8e4de5927bb93bfe943518fc6db93"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7d836ad204543bcd0494ea59d0cc7cf8"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classbindings_1_1_binding.html#a7d836ad204543bcd0494ea59d0cc7cf8">_files_dict</a></td></tr>
+<tr class="separator:a7d836ad204543bcd0494ea59d0cc7cf8"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a915003674a0fdcc8384d9332d023fa4b"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classbindings_1_1_binding.html#a915003674a0fdcc8384d9332d023fa4b">_content</a></td></tr>
+<tr class="separator:a915003674a0fdcc8384d9332d023fa4b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:acb8a9435d2ba348a04e38e4b9d18ea74"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classbindings_1_1_binding.html#acb8a9435d2ba348a04e38e4b9d18ea74">_file</a></td></tr>
+<tr class="separator:acb8a9435d2ba348a04e38e4b9d18ea74"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a47940ced2c58b9f9b3db52b7986682c3"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classbindings_1_1_binding.html#a47940ced2c58b9f9b3db52b7986682c3">_refs</a></td></tr>
+<tr class="separator:a47940ced2c58b9f9b3db52b7986682c3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a97911ca523124185bb1dd02364afed66"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classbindings_1_1_binding.html#a97911ca523124185bb1dd02364afed66">_if</a></td></tr>
+<tr class="separator:a97911ca523124185bb1dd02364afed66"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2cc4fce7df29b3b3d86691bd12302bd3"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classbindings_1_1_binding.html#a2cc4fce7df29b3b3d86691bd12302bd3">_props</a></td></tr>
+<tr class="separator:a2cc4fce7df29b3b3d86691bd12302bd3"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock"><p>This class represent a binding document. </p>
+</div><h2 class="groupheader">Member Function Documentation</h2>
+<a id="ab02b256080ea8f95ab15d87fda4aae12"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab02b256080ea8f95ab15d87fda4aae12">&#9670;&nbsp;</a></span>_init_Properties()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">def bindings.Binding._init_Properties </td>
+          <td>(</td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname"><em>self</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Init <a class="el" href="classbindings_1_1_binding.html#a2cc4fce7df29b3b3d86691bd12302bd3">_props</a> which is basically a <a class="el" href="classbindings_1_1_binding_props.html" title="This class represent the binding properties of a Binding class.">BindingProps</a> item. </p>
+<p>Exctract required list from <a class="el" href="classbindings_1_1_binding.html#a915003674a0fdcc8384d9332d023fa4b">_content</a> and call <a class="el" href="classbindings_1_1_binding_props.html#abc10154460a49a214a0334538e8bb592" title="Init or update _required.">BindingProps.add_required()</a> function </p>
+
+</div>
+</div>
+<a id="a4191e5728779b38e112e3ad4367eddf0"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a4191e5728779b38e112e3ad4367eddf0">&#9670;&nbsp;</a></span>get_prop_by_name()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">def bindings.Binding.get_prop_by_name </td>
+          <td>(</td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname"><em>self</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname"><em>name</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>The clean way to retrieve a property from <a class="el" href="classbindings_1_1_binding_props.html" title="This class represent the binding properties of a Binding class.">BindingProps</a>. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">name</td><td>Name of the desired props </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>A <a class="el" href="classbindings_1_1_prop.html" title="This NamedTuple represent a single property and its value(s)">Prop</a> item or None </dd></dl>
+
+</div>
+</div>
+<a id="aa3f90e6d63934dbba00928347b02c387"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa3f90e6d63934dbba00928347b02c387">&#9670;&nbsp;</a></span>optional()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">def bindings.Binding.optional </td>
+          <td>(</td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname"><em>self</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>The clean way to retrieve <a class="el" href="classbindings_1_1_binding_props.html#a9a556496e492fabf294e86e6906db7e1">BindingProps._optional</a>. </p>
+<dl class="section return"><dt>Returns</dt><dd><a class="el" href="classbindings_1_1_binding_props.html#a9a556496e492fabf294e86e6906db7e1">BindingProps._optional</a> </dd></dl>
+
+</div>
+</div>
+<a id="a1320297716bc79b02550476cc6c49e5a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a1320297716bc79b02550476cc6c49e5a">&#9670;&nbsp;</a></span>required()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">def bindings.Binding.required </td>
+          <td>(</td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname"><em>self</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>The clean way to retrieve <a class="el" href="classbindings_1_1_binding_props.html#a1f84445dc68603c09a322645c15ac239">BindingProps._required</a>. </p>
+<dl class="section return"><dt>Returns</dt><dd><a class="el" href="classbindings_1_1_binding_props.html#a1f84445dc68603c09a322645c15ac239">BindingProps._required</a> </dd></dl>
+
+</div>
+</div>
+<h2 class="groupheader">Member Data Documentation</h2>
+<a id="a915003674a0fdcc8384d9332d023fa4b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a915003674a0fdcc8384d9332d023fa4b">&#9670;&nbsp;</a></span>_content</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">bindings.Binding._content</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p>Internal pointer on loaded yaml </p>
+
+</div>
+</div>
+<a id="acb8a9435d2ba348a04e38e4b9d18ea74"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#acb8a9435d2ba348a04e38e4b9d18ea74">&#9670;&nbsp;</a></span>_file</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">bindings.Binding._file</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p>Internal file pointer </p>
+
+</div>
+</div>
+<a id="a7d836ad204543bcd0494ea59d0cc7cf8"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a7d836ad204543bcd0494ea59d0cc7cf8">&#9670;&nbsp;</a></span>_files_dict</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">bindings.Binding._files_dict</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p>Internal reference on all YAML path in root dir. Given by <a class="el" href="classbindings_1_1_s_d_t_bindings.html" title="The main class that you should call.">SDTBindings</a> </p>
+
+</div>
+</div>
+<a id="a97911ca523124185bb1dd02364afed66"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a97911ca523124185bb1dd02364afed66">&#9670;&nbsp;</a></span>_if</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">bindings.Binding._if</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p>Internal reference on if node from allOf node (currently unused) </p>
+
+</div>
+</div>
+<a id="a5ba8e4de5927bb93bfe943518fc6db93"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a5ba8e4de5927bb93bfe943518fc6db93">&#9670;&nbsp;</a></span>_path</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">bindings.Binding._path</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p>Internal reference for path of the main file </p>
+
+</div>
+</div>
+<a id="a2cc4fce7df29b3b3d86691bd12302bd3"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a2cc4fce7df29b3b3d86691bd12302bd3">&#9670;&nbsp;</a></span>_props</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">bindings.Binding._props</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p>Internal reference on <a class="el" href="classbindings_1_1_binding_props.html" title="This class represent the binding properties of a Binding class.">BindingProps</a> containing properties information </p>
+
+</div>
+</div>
+<a id="a47940ced2c58b9f9b3db52b7986682c3"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a47940ced2c58b9f9b3db52b7986682c3">&#9670;&nbsp;</a></span>_refs</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">bindings.Binding._refs</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p>Internal reference on <a class="el" href="classbindings_1_1_binding.html" title="This class represent a binding document.">Binding</a> included by $ref in allOf node </p>
+
+</div>
+</div>
+<a id="a1f089794a1da770a21d174ca31b7d64b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a1f089794a1da770a21d174ca31b7d64b">&#9670;&nbsp;</a></span>_verbose</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">def bindings.Binding._verbose</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p>Internal reference for printing debug level (0 to 3) </p>
+
+</div>
+</div>
+<a id="a99987b7e4e898a5642636de256b8fbdb"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a99987b7e4e898a5642636de256b8fbdb">&#9670;&nbsp;</a></span>examples</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">bindings.Binding.examples</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>If maintainers did some, you can find dts node examples here </p>
+
+</div>
+</div>
+<a id="a53ad1ee62a15fd802b0ba1006ebb5d04"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a53ad1ee62a15fd802b0ba1006ebb5d04">&#9670;&nbsp;</a></span>file_name</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">bindings.Binding.file_name</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>The YAML file name represented by this class </p>
+
+</div>
+</div>
+<a id="a8f095f37961c7e41b351cfe7651722ef"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a8f095f37961c7e41b351cfe7651722ef">&#9670;&nbsp;</a></span>id</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">bindings.Binding.id</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Usually kernel.org link to this binding </p>
+
+</div>
+</div>
+<a id="a0d22ac9e24ab38ae8a90c3e306e83a2e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a0d22ac9e24ab38ae8a90c3e306e83a2e">&#9670;&nbsp;</a></span>maintainers</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">bindings.Binding.maintainers</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Maintainers of this bindings </p>
+
+</div>
+</div>
+<a id="aa63b422adce42d279e32a9e20b792e33"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa63b422adce42d279e32a9e20b792e33">&#9670;&nbsp;</a></span>schema</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">bindings.Binding.schema</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>dt-schema used as base for this binding </p>
+
+</div>
+</div>
+<a id="a4c9f2642449a0fd6d79abf82f3101caf"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a4c9f2642449a0fd6d79abf82f3101caf">&#9670;&nbsp;</a></span>title</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">bindings.Binding.title</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Title of this bindings </p>
+
+</div>
+</div>
 <hr/>The documentation for this class was generated from the following file:<ul>
 <li>bindings.py</li>
 </ul>
