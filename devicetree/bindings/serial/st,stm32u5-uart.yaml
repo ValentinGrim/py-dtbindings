@@ -11,7 +11,8 @@ maintainers:
 title: STMicroelectronics STM32U5 USART bindings
 
 properties:
-  compatible: st,stm32u5-uart
+  compatible:
+    - st,stm32u5-uart
 
   reg:
     maxItems: 1

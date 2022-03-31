@@ -1,7 +1,6 @@
-"""
-@author Valentin Monnot
-@copyright 2022 - MIT License
-"""
+##
+#	@author Valentin Monnot
+#	@copyright 2022 - MIT License
 import os, sys
 import yaml
 import re
@@ -12,79 +11,81 @@ props_key = ("oneOf", "anyOf", "allOf","const", "contains", "items", "enum")
 dtschema = os.path.expanduser("~/.local/lib/python3.8/site-packages/dtschema")
 
 class SDTBindings:
-    def __init__(self,path,verbose):
-        self._path = path
-        self._verbose = verbose
+	def __init__(self,path,verbose):
+		self._path = path
+		self._verbose = verbose
 
-        # Init path dict
-        self._files_dict = {}
-        for dirpath, _, filenames in os.walk(path):
-           if dirpath != path:
-              for file in filenames:
-                  if ".yaml" in file:
-                      self._files_dict.update({file.split('.')[0] : dirpath + "/" + file})
+		# Init path dict
+		self._files_dict = {}
+		for dirpath, _, filenames in os.walk(path):
+			if dirpath != path:
+				for file in filenames:
+					if ".yaml" in file:
+						self._files_dict.update({file.split('.')[0] : dirpath + "/" + file})
 
-        # Init compatible dict
-        if verbose > 2:
-            print("[INFO]: Initializing compatible dict...")
-        self._compat_dict = {}
-        for key in self._files_dict:
-            tmp = Binding(self._files_dict[key],self._files_dict,verbose)
-            try:
-                self._compat_extractor(key,tmp.properties.prop["compatible"])
-            except AttributeError:
-                pass
-        if verbose > 2:
-            print("[INFO]: Compatible dict initialized !")
+		# Init compatible dict
+		if verbose > 2:
+			print("[INFO]: Initializing compatible dict...")
+		self._compat_dict = {}
+		for key in self._files_dict:
+			tmp = Binding(self._files_dict[key],self._files_dict,verbose)
+			try:
+				self._compat_extractor(key,tmp.properties.prop["compatible"])
+			except AttributeError:
+				pass
+		if verbose > 2:
+			print("[INFO]: Compatible dict initialized !")
 
-    def _compat_extractor(self, key, compat):
-        global props_key
-        if type(compat) is str:
-            # If not vendor specific
-            if not "," in compat:
-                # Avoid process compat outside of it base bindings
-                if not compat in key:
-                    # Some compat like pwm-leds or gpio-leds are stored in
-                    # a file name that is reversed
-                    # e.g. pwm-leds is part of leds-pwm.yaml)
-                    if "-" in compat:
-                        if not "-" in key and compat.split("-")[1] == key:
-                            # Add to the list
-                            self._compat_dict.update({compat : self._files_dict[key]})
-                        elif all(x in key.split("-") for x in compat.split("-")):
-                            # Add to the list
-                            self._compat_dict.update({compat : self._files_dict[key]})
-                        elif key == "opp-v2": # The only one exception
-                            # Add to the list
-                            self._compat_dict.update({compat : self._files_dict[key]})
-                        else:
-                            # DO NOT add to the list
-                            pass
-                    else:
-                        # Add to the list
-                        self._compat_dict.update({compat : self._files_dict[key]})
-                else:
-                    # Add to the list
-                    self._compat_dict.update({compat : self._files_dict[key]})
-            else:
-                # Add to the list
-                self._compat_dict.update({compat : self._files_dict[key]})
+	def _compat_extractor(self, key, compat):
+		global props_key
+		if type(compat) is str:
+			# If not vendor specific
+			if not "," in compat:
+				# Avoid process compat outside of it base bindings
+				if not compat in key:
+					# Some compat like pwm-leds or gpio-leds are stored in
+					# a file name that is reversed
+					# e.g. pwm-leds is part of leds-pwm.yaml)
+					if "-" in compat:
+						if not "-" in key and compat.split("-")[1] == key:
+							# Add to the list
+							self._compat_dict.update({compat : self._files_dict[key]})
+						elif all(x in key.split("-") for x in compat.split("-")):
+							# Add to the list
+							self._compat_dict.update({compat : self._files_dict[key]})
+						elif key == "opp-v2": # The only one exception
+							# Add to the list
+							self._compat_dict.update({compat : self._files_dict[key]})
+						else:
+							# DO NOT add to the list
+							pass
+					else:
+						# Add to the list
+						self._compat_dict.update({compat : self._files_dict[key]})
+				else:
+					# Add to the list
+					self._compat_dict.update({compat : self._files_dict[key]})
+			else:
+				# Add to the list
+				self._compat_dict.update({compat : self._files_dict[key]})
 
-        elif type(compat) is dict:
-            for _key,value in compat.items():
-                if _key in props_key:
-                    self._compat_extractor(key,value)
-        elif type(compat) is list:
-            pass
-        else:
-            # We should never ever be there.
-            print("[ERR ]: Unknown compatible type", type(compat))
-            print(self._files_dict[key])
-            sys.exit(-1)
+		elif type(compat) is dict:
+			for _key,value in compat.items():
+				if _key in props_key:
+					self._compat_extractor(key,value)
+		elif type(compat) is list:
+			pass
+		else:
+			# We should never ever be there.
+			print("[ERR ]: Unknown compatible type", type(compat))
+			print(self._files_dict[key])
+			sys.exit(-1)
 
-    def get_binding(self, compatible):
-        return Binding(self._compat_dict[compatible],self._files_dict,self._verbose)
+	def get_binding(self, compatible):
+		return Binding(self._compat_dict[compatible],self._files_dict,self._verbose)
 
+##
+#	@class		Binding
 class Binding:
 	def __init__(self, path, files_dict,verbose):
 		self._verbose = verbose
@@ -175,8 +176,16 @@ class Binding:
 				print("[INFO]: No node 'allOf' found for", self.file_name)
 			pass
 
+	##
+	#	@fn			_init_Properties(self)
+	#	@brief		Init self._props which is basically a BindingProps item
+	#	@details	Exctract required list from self_.content and call
+	#				BindingProps add_required() function
 	def _init_Properties(self):
 		# Extract required node
+		if self._verbose > 2:
+			print("[INFO]: Initializing properties for ", self.file_name)
+
 		try:
 			required = self._content['required']
 		except KeyError:
@@ -196,27 +205,50 @@ class Binding:
 		for binding in self._refs:
 			self._props.add_from_BindingProp(binding._props)
 
+		if self._verbose > 2:
+			print("[INFO]: Properties initialized for ", self.file_name)
 
+
+##
+#	@class 		Prop
+#	@memberof	NamedTuple
+#	@brief		This NamedTuple represent a single poperty and its value(s)
+#	@var		str	name	Property name
+#	@var		any	value	Value(s) of the properties
 class Prop(NamedTuple):
 	name: str
 	value: Any
 
+
+##
+#	@class		BindingProps
+#	@brief		This class represent the binding properties of a Binding class
+#	@var		dict	_props		Contains properties formatted with Prop
+#	@var		list	_required	A list of all required properties
+#	@var		list	_optional	A list of all optional properties
 class BindingProps:
 	def __init__(self):
 		self._props = {}
 		self._required = []
 		self._optional = []
-
+	##
+	#	@fn			add_required(self, required)
+	#	@brief		Init or update self._required
+	#	@param		required	A list usually extracted from self._content of Binding
 	def add_required(self, required):
 		if not required:
 			return
-
+		# Init or update required list
 		self._required += required
 		# Remove duplicates
 		self._required = list(dict.fromkeys(self._required))
 		self._required.sort()
 		self._update()
 
+	##
+	#	@fn			add_properties(self, properties)
+	#	@brief		Init or update self._optional and _props
+	#	@param		properties	A dict usually extracted from self._content of Binding
 	def add_properties(self, properties):
 		if not properties:
 			return
@@ -225,8 +257,16 @@ class BindingProps:
 			self._optional.append(key)
 		self._optional.sort()
 		self._update()
+		# Init or update props list from properties
+		for key,item in properties.items():
+			value = self._value_analyzer(item)
+			self._props.update({key : Prop(key,value)})
 
-	def add_from_BindingProp(self,prop):
+	##
+	#	@fn			add_from_BindingProp(self, prop)
+	#	@brief		This function meant to be called to add properties of a
+	#				$ref binding to the main Binding()
+	def add_from_BindingProp(self, prop):
 		self._required += prop._required
 		# Remove duplicates
 		self._required = list(dict.fromkeys(self._required))
@@ -235,9 +275,49 @@ class BindingProps:
 		# Remove duplicates
 		self._optional = list(dict.fromkeys(self._optional))
 		# Update
-		#self.prop.update(prop.prop)
+		self._props.update(prop._props)
 		self._update()
 
+	##
+	#	@fn			prop_from_name(self, name)
+	#	@brief		Explicit : return a Prop for a given name
+	#	@param		name	Name of the desired props
+	#	@return		A Prop item or None
+	def prop_from_name(self, name):
+		try:
+			return self._props[name]
+		except KeyError:
+			return None
+
+	##
+	#	@fn			_update(self)
+	#	@brief		Did some cleaning on optional list after update
+	#	@details	After adding new elements to the optional list, check if these
+	#				elements can be found in the required list, and so, remove them
+	#				from the optional list
 	def _update(self):
 		if self._required:
 			self._optional = [item for item in self._optional if item not in self._required]
+
+	##
+	#	@fn			_value_analyzer(self, item)
+	#	@brief		Analyze value type of input and process it
+	#	@details	It should be called for extract necessary info for self_.props
+	#				It ceate some Prop() or list of Prop() or simply return a var
+	#				that should be added to the main Prop() value
+	def _value_analyzer(self, item):
+		if type(item) != dict:
+			return item
+		else:
+			if len(item) == 1:
+				key = list(item.keys())[0]
+				value = list(item.values())[0]
+				return Prop(key,value)
+			else:
+				tmp = []
+				for key, value in item.items():
+					if type(value) == dict:
+						tmp.append(self._value_analyzer(value))
+					else:
+						tmp.append(Prop(key,value))
+				return tmp
