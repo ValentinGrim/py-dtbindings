@@ -2,6 +2,8 @@
  
 ## Brief
   This python "lib" aim is to extract devicetree bindings informations.
+  
+## [Documentation](https://valentingrim.github.io/py-dtbindings/)
 
 ## Class
   ### SDTBindings
