@@ -1,8 +1,5 @@
-"""@package py-dtbindings
-@author Valentin Monnot
-@copyright 2022 - MIT License
-"""
-import os
+ # This file is used for test purspose
+ # It's not part of the docs
 from bindings import SDTBindings
 
 if __name__ == "__main__":

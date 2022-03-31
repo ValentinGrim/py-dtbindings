@@ -71,13 +71,15 @@ $(function() {
 Brief</h1>
 <p>This python "lib" aim is to extract devicetree bindings informations.</p>
 <h1><a class="anchor" id="autotoc_md2"></a>
+&lt;a href="https://valentingrim.github.io/py-dtbindings/"&gt;Documentation&lt;/a&gt;</h1>
+<h1><a class="anchor" id="autotoc_md3"></a>
 Class</h1>
-<h2><a class="anchor" id="autotoc_md3"></a>
+<h2><a class="anchor" id="autotoc_md4"></a>
 SDTBindings</h2>
 <p>This is the root class, this is the one that should be called. Give it the path of your local copy of bindings and it will load it.</p>
 <p>1 - It will search for every YAML file in provided dir and subdir 2 - It will attemp to decode it and make is own list of compatible.</p>
 <p>Use the method get_binding by providing it a compatible string (e.g. myBinding = mySDTBindings.get_binding("gpio-keys") And it will return a Binding object created from gpio-keys.yaml binging</p>
-<h2><a class="anchor" id="autotoc_md4"></a>
+<h2><a class="anchor" id="autotoc_md5"></a>
 Binding</h2>
 <p>This class class represent a binding :)</p>
 <p>1 - It will load the provided binding 2 - It will extract main information (e.g. id, schema, properties, required ...) 3 - If there is some inclusion, it will also load them and add these properties</p>
@@ -90,7 +92,7 @@ Binding</h2>
 <li>properties (BindingProps class)</li>
 <li>examples</li>
 </ul>
-<h2><a class="anchor" id="autotoc_md5"></a>
+<h2><a class="anchor" id="autotoc_md6"></a>
 BindingProps</h2>
 <p>This class represent properties of a binding. It stand to be initialized by a Binding class and access through it. This class var will also contains binding properties of included bindings (e.g. using "allOf/$ref")</p>
 <p>This class content is planned to be access through internal var (theoretically "_var" is private var).</p>
@@ -99,19 +101,19 @@ BindingProps</h2>
 <li>optional (same for opional properties)</li>
 <li>prop (A python dict containing properties meant to be access using above list item as key)</li>
 </ul>
-<h1><a class="anchor" id="autotoc_md6"></a>
+<h1><a class="anchor" id="autotoc_md7"></a>
 Usage</h1>
-<h2><a class="anchor" id="autotoc_md7"></a>
+<h2><a class="anchor" id="autotoc_md8"></a>
 Linux:</h2>
 <p>sudo apt install swig python3 python3-ruamel.yaml pip3 install -r ./requirement.txt</p>
 <p>Then juste add bindings.py to your project and let's go ¯_(ツ)_/¯ !</p>
-<h1><a class="anchor" id="autotoc_md8"></a>
+<h1><a class="anchor" id="autotoc_md9"></a>
 Devicetree files</h1>
 <p>wget-ed from <a href="https://www.kernel.org/doc/Documentation/devicetree/bindings/">https://www.kernel.org/doc/Documentation/devicetree/bindings/</a></p>
-<h1><a class="anchor" id="autotoc_md9"></a>
+<h1><a class="anchor" id="autotoc_md10"></a>
 Contribute</h1>
 <p>Feel free to improve this as you want and share it ! Also I'm listening to any comments !</p>
-<h1><a class="anchor" id="autotoc_md10"></a>
+<h1><a class="anchor" id="autotoc_md11"></a>
 Contact</h1>
 <ul>
 <li>Valentin Monnot <a href="#" onclick="location.href='mai'+'lto:'+'vmo'+'nn'+'ot@'+'ou'+'tlo'+'ok'+'.co'+'m'; return false;">vmonn<span style="display: none;">.nosp@m.</span>ot@o<span style="display: none;">.nosp@m.</span>utloo<span style="display: none;">.nosp@m.</span>k.co<span style="display: none;">.nosp@m.</span>m</a> </li>
