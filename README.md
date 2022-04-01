@@ -7,11 +7,10 @@
 
 ## TODO :
 		- Update this readme !
-		- Complete _compat_extractor() in SDTBindings because of the rework of Prop
-		- Currently mySDTBindings.get_binding("gpio-keys") doesn't work because of above point
+		- [Docs TODO Page ](https://valentingrim.github.io/py-dtbindings/todo.html)
 
 
-## Class
+## Class (Not up to date ! see docs)
   ### SDTBindings
     This is the root class, this is the one that should be called.
     Give it the path of your local copy of bindings and it will load it.
