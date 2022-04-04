@@ -125,7 +125,10 @@ class SDTBindings:
 	#	@brief		Init the Binding class corresponding to compatible param
 	#	@param		compatible	The compatible you want the binding for
 	def get_binding(self, compatible):
-		return Binding(self._compat_dict[compatible],self._files_dict,self._verbose)
+		try:
+			return Binding(self._compat_dict[compatible],self._files_dict,self._verbose)
+		except KeyError:
+			return None
 
 	##
 	#	@fn			_duplicate_checker(self, item, key)
