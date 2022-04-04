@@ -1,13 +1,13 @@
 ##
-#	@author Valentin Monnot
-#	@copyright 2022 - MIT License
+#	@author 	Valentin Monnot
+#	@copyright 	2022 - MIT License
+#	@version	v1.0
 import os, sys, time
 import yaml
 import re
 
 from typing import NamedTuple, Any
 
-props_key = ("oneOf", "anyOf", "allOf","const", "contains", "items", "enum")
 dtschema = os.path.expanduser("~/.local/lib/python3.8/site-packages/dtschema")
 
 ##
@@ -26,7 +26,7 @@ dtschema = os.path.expanduser("~/.local/lib/python3.8/site-packages/dtschema")
 #		print(myBinding.required())
 #	~~~~~~~~~~~~~~~~~~~~~
 class SDTBindings:
-	def __init__(self,path,verbose):
+	def __init__(self,path,verbose,test = False):
 		##
 		#	@var		_path
 		#	@brief		Internal reference to rootdir of bindings
@@ -52,16 +52,35 @@ class SDTBindings:
 						self._files_dict.update({file.split('.')[0] : dirpath + "/" + file})
 
 		# Init compatible dict
+
 		if verbose > 2:
 			print("[INFO]: Initializing compatible dict...")
 
 		for key in self._files_dict:
 			tmp = Binding(self._files_dict[key],self._files_dict,verbose)
+			tmp_a = tmp.get_prop_by_name("select")
 			tmp = tmp.get_prop_by_name("compatible")
 			if tmp:
 				self._compat_extractor(key,tmp.value)
+			if tmp_a:
+				print(tmp_a)
 			else:
 				pass
+
+		if test:
+			file_t = open('test.txt','w')
+			origin = sys.stdout
+			sys.stdout = file_t
+
+			for compat in self._compat_dict.items():
+				if self._verbose:
+					print(compat)
+				else:
+					if not ',' in compat[0]:
+						print(compat)
+
+			file_t.close()
+			sys.stdout = origin
 
 		if verbose > 2:
 			print("[INFO]: Compatible dict initialized !")
@@ -70,9 +89,8 @@ class SDTBindings:
 	#	@fn			_compat_extractor(self, key, compat)
 	#	@brief		Extract compatible node from properties and
 	#				init a dict like #_files_dict to access path through compatible
-	#	@todo		End rework		
-	#				* Process oneOf / anyOf / allOf nodes
-	#				* Process an all node, export to a file and check if all working great
+	#	@todo		Process compatible with "pattern"\n
+	#				Process "snps,dwmac"
 	def _compat_extractor(self, key, compat):
 		# TODO: ???
 		if key == 'snps,dwmac':
@@ -86,12 +104,15 @@ class SDTBindings:
 				for item in compat.value:
 					self._duplicate_checker(item, key)
 
-			elif compat.name in ('contains','items'):
+			elif compat.name in ('contains','items','oneOf','allOf','anyOf'):
 				self._compat_extractor(key,compat.value)
 
+			elif compat.name == "pattern":
+				# TODO
+				pass
+
 			else:
-				#print(compat)
-				#print("\n")
+				# Description and deprecated, ignore it
 				pass
 		else:
 			if type(compat) is str:
@@ -114,15 +135,55 @@ class SDTBindings:
 		try:
 			# Check if already exist in the list and if path are diff
 			if self._compat_dict[item] != self._files_dict[key]:
-				if os.stat(self._compat_dict[item]).st_mtime < os.stat(self._files_dict[key]).st_mtime:
-					self._compat_dict.update({item : self._files_dict[key]})
-				if self._verbose:
-					print("[WARN]: There is maybe duplicate files :")
-					print("		",self._compat_dict[item])
-					print("		",self._files_dict[key])
-					print("[WARN]: Choosing the most recent one...")
+				# Check last modif to choose which one we keep
+				if not item in key and not key in item:
+					if ',' in item:
+						if os.stat(self._compat_dict[item]).st_mtime > os.stat(self._files_dict[key]).st_mtime:
+							if self._verbose:
+								print("[WARN]: Not added '" + item + "' in " + self._files_dict[key])
+								print("[WARN]: Item already exist in " + self._compat_dict[item])
+							return
+					else:
+						if self._verbose:
+							print("[WARN]: Not added '" + item + "' in " + self._files_dict[key])
+							print("[WARN]: Item already exist in " + self._compat_dict[item])
+							print("[INFO]: Existing item might be wrong and will be replace later...")
+						return
 		except KeyError:
-			# This compat is not part of the list so we must add it
+			pass
+
+		if not ',' in item:
+			# Avoid process compat outside of it base binding
+			if not item in key and not key in item:
+				# Some compat like pwm-leds or gpio-leds are stored in
+				# a file name that is reversed
+				# e.g. pwm-leds is part of leds-pwm.yaml)
+				if '-' in item:
+					if not "-" in key and item.split("-")[1] == key:
+						# Add to the list
+						self._compat_dict.update({item : self._files_dict[key]})
+					elif any(x in key.split("-") for x in item.split("-")):
+						# Add to the list
+						# simple-bus is a schema and can be added to this list
+						# by fsl,spba-bus.yaml but, it shouldn't be in this list
+						# since this list doesn't contains schemas
+						if not item == "simple-bus":
+							self._compat_dict.update({item : self._files_dict[key]})
+					elif key == "opp-v2": # The only one exception
+						# Add to the list
+						self._compat_dict.update({item : self._files_dict[key]})
+					else:
+						# simple-mfd had no yaml
+						if not item == "simple-mfd":
+							self._compat_dict.update({item : self._files_dict[key]})
+				else:
+					# Add to the list
+					self._compat_dict.update({item : self._files_dict[key]})
+			else:
+				# Add to the list
+				self._compat_dict.update({item : self._files_dict[key]})
+		else:
+			# Add to the list
 			self._compat_dict.update({item : self._files_dict[key]})
 
 ##
