@@ -394,6 +394,7 @@ class Binding:
 #				Prop is like a C struct, with 2 field:\n
 #				* Prop.name 	-> The name of the property\n
 #				* Prop.value 	-> Value(s) of the property
+#	@todo 		Add type to prop
 class Prop(NamedTuple):
 	name: str
 	value: Any
@@ -402,6 +403,8 @@ class Prop(NamedTuple):
 ##
 #	@class		BindingProps
 #	@brief		This class represent the binding properties of a Binding class
+#	@todo 		Find a way to load type for prop from schema if so and from prop
+#				themself otherway
 class BindingProps:
 	def __init__(self):
 		##
