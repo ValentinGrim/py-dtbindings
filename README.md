@@ -73,8 +73,8 @@
   Also I'm listening to any comments !
 
 ## Third Party
-	- [Doxygen Awesome](https://github.com/jothepro/doxygen-awesome-css)
-	- [dtschema](https://github.com/devicetree-org/dt-schema)
+- [Doxygen Awesome](https://github.com/jothepro/doxygen-awesome-css)
+- [dtschema](https://github.com/devicetree-org/dt-schema)
 
 ## Contact
   - Valentin Monnot <vmonnot@outlook.com>
