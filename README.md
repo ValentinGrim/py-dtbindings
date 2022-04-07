@@ -24,7 +24,7 @@
    And it will return a Binding object created from gpio-keys.yaml binging
 
   ### Binding
-	 ``/!\ Need a rework (see docs)``
+  ``/!\ Need a rework (see docs)``
 
    This class class represent a binding :)
 
@@ -43,7 +43,7 @@
     - examples
 
   ### BindingProps
-	 ``/!\ Need a rework (see docs)``
+  ``/!\ Need a rework (see docs)``
 
    This class represent properties of a binding.
    It stand to be initialized by a Binding class and access through it.
