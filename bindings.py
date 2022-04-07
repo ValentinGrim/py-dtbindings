@@ -1,7 +1,9 @@
 ##
 #	@author 	Valentin Monnot
-#	@copyright 	2022 - MIT License
+#	@copyright 	SPDX-License-Identifier: MIT
 #	@version	v1.0
+#	@date 		2022
+
 import os, sys, time
 import yaml
 import re
@@ -58,12 +60,9 @@ class SDTBindings:
 
 		for key in self._files_dict:
 			tmp = Binding(self._files_dict[key],self._files_dict,verbose)
-			tmp_a = tmp.get_prop_by_name("select")
 			tmp = tmp.get_prop_by_name("compatible")
 			if tmp:
 				self._compat_extractor(key,tmp.value)
-			if tmp_a:
-				print(tmp_a)
 			else:
 				pass
 
@@ -284,53 +283,54 @@ class Binding:
 	#	@brief		Init #_refs
 	def _init_allOf(self):
 		try:
-			for item in self._content['allOf']:
-				if '$ref' in item:
-					path = ""
-					# If ref pointing on a dt-schema, path used is defined
-					# at top of this script and point on path where pip3
-					# installed dt-schema
-					if "schemas/" in item['$ref']:
-						#TODO:  Instead of spliting on '#', we should be able
-						#       to handle the case where there node ref
-						#       after this '#'. (If it make sens)
-						path = dtschema + item['$ref'].split('#')[0]
-
-					# Relative path
-					elif "../" in item['$ref']:
-						path = self._path.rsplit('/',1)[0] + item['$ref'].replace('..','').replace('#','')
-					else:
-						# There is multiple common.yaml.
-						# Some of them have relative path and can be process
-						# with the above statement, other generally are
-						# stored in other dir
-						# e.g. root_dir/dir_a/subdir_a/myfile.yaml
-						#	_______________________________|
-						#  |-> root_dir/dir_b/common.yaml
-						if "/common.yaml" in item['$ref']:
-							path = self._path
-							# This loop is used to get back to root dir
-							while path.rsplit('/',1)[1] != "bindings":
-								path = path.rsplit('/',1)[0]
-							path += '/' + item['$ref'].split('#')[0]
-						# Finaly, normal ref
-						else:
-							#TODO:  Same as above
-							name = item['$ref'].split('#')[0].replace('.yaml','')
-							name = name.rsplit('/',1)[0]
-							path = self._files_dict[name]
-
-					if self._verbose > 2:
-						print("[INFO]: Binding <%s> loading $ref <%s>" % (self.file_name, path))
-					self._refs.append(Binding(path,self._files_dict,self._verbose))
-
-				if 'if' in item:
-					self._if.append(item)
-
+			self._content['allOf']
 		except KeyError:
 			if self._verbose > 2:
 				print("[INFO]: No node 'allOf' found for", self.file_name)
-			pass
+			return
+
+		for item in self._content['allOf']:
+			if '$ref' in item:
+				path = ""
+				# If ref pointing on a dt-schema, path used is defined
+				# at top of this script and point on path where pip3
+				# installed dt-schema
+				if "schemas/" in item['$ref']:
+					#TODO:  Instead of spliting on '#', we should be able
+					#       to handle the case where there node ref
+					#       after this '#'. (If it make sens)
+					path = dtschema + item['$ref'].split('#')[0]
+
+					# Relative path
+				elif "../" in item['$ref']:
+					path = self._path.rsplit('/',1)[0] + item['$ref'].replace('..','').replace('#','')
+				else:
+					# There is multiple common.yaml.
+					# Some of them have relative path and can be process
+					# with the above statement, other generally are
+					# stored in other dir
+					# e.g. root_dir/dir_a/subdir_a/myfile.yaml
+					#	_______________________________|
+					#  |-> root_dir/dir_b/common.yaml
+					if "/common.yaml" in item['$ref']:
+						path = self._path
+						# This loop is used to get back to root dir
+						while path.rsplit('/',1)[1] != "bindings":
+							path = path.rsplit('/',1)[0]
+						path += '/' + item['$ref'].split('#')[0]
+					# Finaly, normal ref
+					else:
+						#TODO:  Same as above
+						name = item['$ref'].split('#')[0].replace('.yaml','')
+						name = name.rsplit('/',1)[0]
+						path = self._files_dict[name]
+
+				if self._verbose > 2:
+					print("[INFO]: Binding <%s> loading $ref <%s>" % (self.file_name, path))
+				self._refs.append(Binding(path,self._files_dict,self._verbose))
+
+			if 'if' in item:
+				self._if.append(item)
 
 	##
 	#	@fn			_init_Properties(self)
@@ -479,6 +479,15 @@ class BindingProps:
 		try:
 			return self._props[name]
 		except KeyError:
+			# Check if there is any pattern in nodes matching the name
+			for key,value in self._props.items():
+				if type(value.value) == list:
+					for prop in value.value:
+						if isinstance(prop, Prop):
+							if prop.name == 'pattern':
+								if re.match(prop.value, name):
+									return self._props[key]
+			# Else return nothing
 			return None
 
 	##
