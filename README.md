@@ -53,9 +53,9 @@
    This class content is planned to be access through internal var (theoretically "_var" is private var).
 
    Accessible node list:
-    - required (str list of all required properties)
-    - optional (same for opional properties)
-    - prop     (A python dict containing properties meant to be access using above list item as key)
+   - required (str list of all required properties)
+   - optional (same for opional properties)
+   - prop     (A python dict containing properties meant to be access using above list item as key)
 
 ## Usage
   ### Linux:
