@@ -9,10 +9,15 @@
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
+<link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="resize.js"></script>
+<script type="text/javascript" src="navtreedata.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
 <link href="search/search.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="search/searchdata.js"></script>
 <script type="text/javascript" src="search/search.js"></script>
 <link href="doxygen.css" rel="stylesheet" type="text/css" />
+<link href="doxygen-awesome.css" rel="stylesheet" type="text/css"/>
 </head>
 <body>
 <div id="top"><!-- do not remove this div, it is closed by doxygen! -->
@@ -48,6 +53,22 @@ $(function() {
 /* @license-end */</script>
 <div id="main-nav"></div>
 </div><!-- top -->
+<div id="side-nav" class="ui-resizable side-nav-resizable">
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
+  </div>
+  <div id="splitbar" style="-moz-user-select:none;" 
+       class="ui-resizable-handle">
+  </div>
+</div>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:cf05388f2679ee054f2beb29a391d25f4e673ac3&amp;dn=gpl-2.0.txt GPL-v2 */
+$(document).ready(function(){initNavTree('index.html',''); initResizable(); });
+/* @license-end */
+</script>
+<div id="doc-content">
 <!-- window showing the filter options -->
 <div id="MSearchSelectWindow"
      onmouseover="return searchBox.OnSearchSelectShow()"
@@ -57,7 +78,7 @@ $(function() {
 
 <!-- iframe showing the search results (closed by default) -->
 <div id="MSearchResultsWindow">
-<iframe src="javascript:void(0)" frameborder="0"
+<iframe src="javascript:void(0)" frameborder="0" 
         name="MSearchResults" id="MSearchResults">
 </iframe>
 </div>
@@ -71,9 +92,10 @@ $(function() {
 Brief</h1>
 <p>This python "lib" aim is to extract devicetree bindings informations.</p>
 <h1><a class="anchor" id="autotoc_md2"></a>
-<a href="https://valentingrim.github.io/py-dtbindings/">Documentation</a></h1>
+Documentation</h1>
+<p><a href="https://valentingrim.github.io/py-dtbindings/">Doxygen on github.io</a></p>
 <h1><a class="anchor" id="autotoc_md3"></a>
-TODO :</h1>
+TODO</h1>
 <ul>
 <li>Update this readme !</li>
 <li><a href="https://valentingrim.github.io/py-dtbindings/todo.html">Docs TODO Page</a></li>
@@ -83,12 +105,20 @@ Class (Not up to date ! see docs)</h1>
 <h2><a class="anchor" id="autotoc_md5"></a>
 SDTBindings</h2>
 <p>This is the root class, this is the one that should be called. Give it the path of your local copy of bindings and it will load it.</p>
-<p>1 - It will search for every YAML file in provided dir and subdir 2 - It will attemp to decode it and make is own list of compatible.</p>
+<ul>
+<li>It will search for every YAML file in provided dir and subdir</li>
+<li>It will attemp to decode it and make is own list of compatible.</li>
+</ul>
 <p>Use the method get_binding by providing it a compatible string (e.g. myBinding = mySDTBindings.get_binding("gpio-keys") And it will return a Binding object created from gpio-keys.yaml binging</p>
 <h2><a class="anchor" id="autotoc_md6"></a>
-Binding <tt>/!\ Need a rework (see docs)</tt></h2>
+Binding</h2>
+<p><code>/!\ Need a rework (see docs)</code></p>
 <p>This class class represent a binding :)</p>
-<p>1 - It will load the provided binding 2 - It will extract main information (e.g. id, schema, properties, required ...) 3 - If there is some inclusion, it will also load them and add these properties</p>
+<ul>
+<li>It will load the provided binding</li>
+<li>It will extract main information (e.g. id, schema, properties, required ...)</li>
+<li>If there is some inclusion, it will also load them and add these properties</li>
+</ul>
 <p>This class has no methods (for the moment) content is planned to be accessed through internal var (theoretically "_var" is private var)</p>
 <p>Accessible node list:</p><ul>
 <li>id</li>
@@ -99,7 +129,8 @@ Binding <tt>/!\ Need a rework (see docs)</tt></h2>
 <li>examples</li>
 </ul>
 <h2><a class="anchor" id="autotoc_md7"></a>
-BindingProps <tt>/!\ Need a rework (see docs)</tt></h2>
+BindingProps</h2>
+<p><code>/!\ Need a rework (see docs)</code></p>
 <p>This class represent properties of a binding. It stand to be initialized by a Binding class and access through it. This class var will also contains binding properties of included bindings (e.g. using "allOf/$ref")</p>
 <p>This class content is planned to be access through internal var (theoretically "_var" is private var).</p>
 <p>Accessible node list:</p><ul>
@@ -120,17 +151,26 @@ Devicetree files</h1>
 Contribute</h1>
 <p>Feel free to improve this as you want and share it ! Also I'm listening to any comments !</p>
 <h1><a class="anchor" id="autotoc_md12"></a>
+Third Party</h1>
+<ul>
+<li><a href="https://github.com/jothepro/doxygen-awesome-css">Doxygen Awesome</a></li>
+<li><a href="https://github.com/devicetree-org/dt-schema">dtschema</a></li>
+</ul>
+<h1><a class="anchor" id="autotoc_md13"></a>
 Contact</h1>
 <ul>
 <li>Valentin Monnot <a href="#" onclick="location.href='mai'+'lto:'+'vmo'+'nn'+'ot@'+'ou'+'tlo'+'ok'+'.co'+'m'; return false;">vmonn<span style="display: none;">.nosp@m.</span>ot@o<span style="display: none;">.nosp@m.</span>utloo<span style="display: none;">.nosp@m.</span>k.co<span style="display: none;">.nosp@m.</span>m</a> </li>
 </ul>
 </div></div><!-- PageDoc -->
 </div><!-- contents -->
+</div><!-- doc-content -->
 <!-- start footer part -->
-<hr class="footer"/><address class="footer"><small>
-Generated by &#160;<a href="http://www.doxygen.org/index.html">
-<img class="footer" src="doxygen.png" alt="doxygen"/>
-</a> 1.8.17
-</small></address>
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+    <li class="footer">Generated by
+    <a href="http://www.doxygen.org/index.html">
+    <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.17 </li>
+  </ul>
+</div>
 </body>
 </html>
