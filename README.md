@@ -4,7 +4,7 @@
   This python "lib" aim is to extract devicetree bindings informations.
 
 ## Documentation
-	[Doxygen on github.io](https://valentingrim.github.io/py-dtbindings/)
+[Doxygen on github.io](https://valentingrim.github.io/py-dtbindings/)
 
 ## TODO
 - Update this readme !
