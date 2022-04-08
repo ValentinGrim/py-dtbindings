@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['prop_39',['Prop',['../classbindings_1_1_prop.html',1,'bindings']]]
+  ['mainprop_44',['MainProp',['../classbindings_1_1_main_prop.html',1,'bindings']]]
 ];

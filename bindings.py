@@ -1,5 +1,5 @@
 ##
-#	@files		 bindings.py
+#	@file		 bindings.py
 #	@author		Valentin Monnot
 #	@copyright 	SPDX-License-Identifier: MIT
 #	@version	v1.1
@@ -11,7 +11,22 @@ import re
 
 from typing import NamedTuple, Any
 
+##
+#	@var		dtschema
+#	@brief		Path to dtschema python library in order to access to schema
+#	@details	This path may need to be more dynamic one day but as
+#				most user will have de same path (on linux platform)
+#				that's static for now. And you always can modify it as you want
 dtschema = os.path.expanduser("~/.local/lib/python3.8/site-packages/dtschema")
+
+##
+#	@var		static_types
+#	@brief		This dict is used to store node type information for
+#				"standard" and static properties
+static_types = { 'reg' 		: 	[('unsigned int', 'base_address'),
+							 	 ('unsigned int', 'reg_size'	)],
+				'clocks' 	: 	[('phandle'		, 'clock'		),
+								 ('unsigned int', 'clock_id'	)]}
 
 ##
 #	@class		SDTBindings
@@ -398,17 +413,28 @@ class Binding:
 
 ##
 #	@class 		Prop
-#	@memberof	NamedTuple
 #	@brief		This NamedTuple represent a single property and its value(s)
 #	@details	As NamedTuple var can't be detected by doxygen, here it's how it work:\n
 #				Prop is like a C struct, with 2 field:\n
 #				* Prop.name 	-> The name of the property\n
 #				* Prop.value 	-> Value(s) of the property
-#	@todo 		Add type to prop
 class Prop(NamedTuple):
 	name: str
 	value: Any
 
+##
+#	@class 		MainProp
+#	@brief		This NamedTuple represent a single property and its value(s)
+#	@details	This class is like Prop but should be at top level (as Prop.value could be another Prop)\n
+#				As NamedTuple var can't be detected by doxygen, here it's how it work:\n
+#				MainProp is like a C struct, with 3 field:\n
+#				* MainProp.name 	-> The name of the property\n
+#				* MainProp.value 	-> Value(s) of the property\n
+#				* MainProp.type		-> Type of the property
+class MainProp(NamedTuple):
+	name: str
+	value: Any
+	type: str
 
 ##
 #	@class		BindingProps
@@ -459,7 +485,8 @@ class BindingProps:
 		# Init or update props list from properties
 		for key,item in properties.items():
 			value = self._value_analyzer(item)
-			self._props.update({key : Prop(key,value)})
+			type = self._get_type(key, item)
+			self._props.update({key : MainProp(key,value,type)})
 
 	##
 	#	@fn			add_from_BindingProp(self, prop)
@@ -557,3 +584,6 @@ class BindingProps:
 		else:
 			# Return literal, it will be the Prop.value
 			return item
+
+	def _get_type(self, key, item):
+		return key

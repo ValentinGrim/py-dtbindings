@@ -1,27 +1,30 @@
 var indexSectionsWithContent =
 {
-  0: "_abefgimoprst",
-  1: "bps",
-  2: "_agopr",
-  3: "_efimst",
-  4: "pt"
+  0: "_abdefgilmoprst",
+  1: "bmps",
+  2: "b",
+  3: "_agopr",
+  4: "_defimst",
+  5: "lpt"
 };
 
 var indexSectionNames =
 {
   0: "all",
   1: "classes",
-  2: "functions",
-  3: "variables",
-  4: "pages"
+  2: "files",
+  3: "functions",
+  4: "variables",
+  5: "pages"
 };
 
 var indexSectionLabels =
 {
   0: "All",
   1: "Classes",
-  2: "Functions",
-  3: "Variables",
-  4: "Pages"
+  2: "Files",
+  3: "Functions",
+  4: "Variables",
+  5: "Pages"
 };
 

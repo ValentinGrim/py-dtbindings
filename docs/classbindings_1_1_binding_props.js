@@ -1,5 +1,6 @@
 var classbindings_1_1_binding_props =
 [
+    [ "_get_type", "classbindings_1_1_binding_props.html#a408f24e7d994a6a4e24dfcf2beb9cecf", null ],
     [ "_update", "classbindings_1_1_binding_props.html#af3d16b487f9cc6a6544cab287ad1568f", null ],
     [ "_value_analyzer", "classbindings_1_1_binding_props.html#af35096c0dbb226e3e22318076bb5f439", null ],
     [ "add_from_BindingProp", "classbindings_1_1_binding_props.html#a8e5cc55d80adfa43fc7dc30b136d03db", null ],

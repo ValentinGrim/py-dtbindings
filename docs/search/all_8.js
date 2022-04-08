@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['optional_28',['optional',['../classbindings_1_1_binding.html#aa3f90e6d63934dbba00928347b02c387',1,'bindings::Binding']]]
+  ['license_29',['License',['../md__l_i_c_e_n_s_e.html',1,'']]]
 ];

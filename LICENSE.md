@@ -1,4 +1,5 @@
-MIT License
+# License
+## MIT License
 
 Copyright (c) 2022 Valentin Monnot
 

@@ -1,4 +1,5 @@
 var searchData=
 [
-  ['title_71',['title',['../classbindings_1_1_binding.html#a4c9f2642449a0fd6d79abf82f3101caf',1,'bindings::Binding']]]
+  ['schema_78',['schema',['../classbindings_1_1_binding.html#aa63b422adce42d279e32a9e20b792e33',1,'bindings::Binding']]],
+  ['static_5ftypes_79',['static_types',['../bindings_8py.html#af03895848b5a9b7dde9af9d6f4a9dc59',1,'bindings']]]
 ];
