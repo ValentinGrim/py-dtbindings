@@ -26,7 +26,7 @@ var NAVTREE =
     [ "Brief", "index.html#autotoc_md1", null ],
     [ "Documentation", "index.html#autotoc_md2", null ],
     [ "TODO", "index.html#autotoc_md3", null ],
-    [ "Class (Not up to date ! see docs)", "index.html#autotoc_md4", [
+    [ "Class", "index.html#autotoc_md4", [
       [ "SDTBindings", "index.html#autotoc_md5", null ],
       [ "Binding", "index.html#autotoc_md6", null ],
       [ "BindingProps", "index.html#autotoc_md7", null ]

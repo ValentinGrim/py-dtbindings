@@ -11,70 +11,70 @@
 - [Docs TODO Page ](https://valentingrim.github.io/py-dtbindings/todo.html)
 
 
-## Class (Not up to date ! see docs)
-  ### SDTBindings
-   This is the root class, this is the one that should be called.
-   Give it the path of your local copy of bindings and it will load it.
+## Class
+### SDTBindings
+This is the root class, this is the one that should be called.
+Give it the path of your local copy of bindings and it will load it.
 
-   - It will search for every YAML file in provided dir and subdir
-   - It will attemp to decode it and make is own list of compatible.
+- It will search for every YAML file in provided dir and subdir
+- It will attemp to decode it and make is own list of compatible.
 
-   Use the method get_binding by providing it a compatible string
-   (e.g. myBinding = mySDTBindings.get_binding("gpio-keys")
-   And it will return a Binding object created from gpio-keys.yaml binging
+As there is an internal list of compatible pointing on file its related to,
+you should call get_binding method to retrieve a Binding from a given compatible  
+(e.g. myBinding = mySDTBindings.get_binding("gpio-keys") will return a Binding object created from gpio-keys.yaml binding)
 
-  ### Binding
-  ``/!\ Need a rework (see docs)``
+### Binding
 
-   This class class represent a binding :)
+This class class represent a binding :)
 
-   - It will load the provided binding
-   - It will extract main information (e.g. id, schema, properties, required ...)
-   - If there is some inclusion, it will also load them and add these properties
+- It will load the provided binding
+- It will extract main information (e.g. id, schema, properties, required ...)
+- If there is some inclusion, it will also load them and add these properties
 
-   This class has no methods (for the moment) content is planned to be accessed through internal var (theoretically "_var" is private var)
+Public Member Functions:
+- get_prop_by_name(name)  
+``Will return a Prop item by calling :
+BindingProps.prop_from_name(name) functions``
+- required()  
+``Will return required properties list (str)``
+- optional()  
+``Will return optional properties list (str)``
 
-   Accessible node list:
-    - id
-    - schema
-    - maintainers
-    - title
-    - properties (BindingProps class)
-    - examples
+Public Attributes:
+- file_name
+- id
+- schema
+- maintainers
+- title
+- examples
 
-  ### BindingProps
-  ``/!\ Need a rework (see docs)``
+### BindingProps
 
-   This class represent properties of a binding.
-   It stand to be initialized by a Binding class and access through it.
-   This class var will also contains binding properties of included bindings
-   (e.g. using "allOf/$ref")
+This class represent properties of a binding.
+It stand to be initialized by a Binding class and access through it.
+This class var will also contains binding properties of included bindings
+(e.g. using "allOf/$ref")
 
-   This class content is planned to be access through internal var (theoretically "_var" is private var).
-
-   Accessible node list:
-   - required (str list of all required properties)
-   - optional (same for opional properties)
-   - prop     (A python dict containing properties meant to be access using above list item as key)
+All member functions should be called by a Binding class for initializing
 
 ## Usage
-  ### Linux:
+### Linux:
 
     sudo apt install swig python3 python3-ruamel.yaml
     pip3 install -r ./requirement.txt
 
-   Then juste add bindings.py to your project and let's go ``¯\_(ツ)_/¯`` !
+Then juste add bindings.py to your project and let's go ``¯\_(ツ)_/¯`` !
 
 ## Devicetree files
-  wget-ed from https://www.kernel.org/doc/Documentation/devicetree/bindings/
+wget-ed from https://www.kernel.org/doc/Documentation/devicetree/bindings/
 
 ## Contribute
-  Feel free to improve this as you want and share it !
-  Also I'm listening to any comments !
+Feel free to improve this as you want and share it !
+Also I'm listening to any comments !
 
 ## Third Party
 - [Doxygen Awesome](https://github.com/jothepro/doxygen-awesome-css)
 - [dtschema](https://github.com/devicetree-org/dt-schema)
 
 ## Contact
-  - Valentin Monnot <vmonnot@outlook.com>
+- Valentin Monnot <vmonnot@outlook.com>

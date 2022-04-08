@@ -27,7 +27,7 @@
  <tr style="height: 56px;">
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">py-dtbindings
-   &#160;<span id="projectnumber">v1.1</span>
+   &#160;<span id="projectnumber">dev</span>
    </div>
    <div id="projectbrief">This python &quot;lib&quot; aim is to extract devicetree bindings informations.</div>
   </td>
@@ -101,7 +101,7 @@ TODO</h1>
 <li><a href="https://valentingrim.github.io/py-dtbindings/todo.html">Docs TODO Page</a></li>
 </ul>
 <h1><a class="anchor" id="autotoc_md4"></a>
-Class (Not up to date ! see docs)</h1>
+Class</h1>
 <h2><a class="anchor" id="autotoc_md5"></a>
 SDTBindings</h2>
 <p>This is the root class, this is the one that should be called. Give it the path of your local copy of bindings and it will load it.</p>
@@ -109,41 +109,43 @@ SDTBindings</h2>
 <li>It will search for every YAML file in provided dir and subdir</li>
 <li>It will attemp to decode it and make is own list of compatible.</li>
 </ul>
-<p>Use the method get_binding by providing it a compatible string (e.g. myBinding = mySDTBindings.get_binding("gpio-keys") And it will return a Binding object created from gpio-keys.yaml binging</p>
+<p>As there is an internal list of compatible pointing on file its related to, you should call get_binding method to retrieve a Binding from a given compatible <br  />
+ (e.g. myBinding = mySDTBindings.get_binding("gpio-keys") will return a Binding object created from gpio-keys.yaml binding)</p>
 <h2><a class="anchor" id="autotoc_md6"></a>
 Binding</h2>
-<p><code>/!\ Need a rework (see docs)</code></p>
 <p>This class class represent a binding :)</p>
 <ul>
 <li>It will load the provided binding</li>
 <li>It will extract main information (e.g. id, schema, properties, required ...)</li>
 <li>If there is some inclusion, it will also load them and add these properties</li>
 </ul>
-<p>This class has no methods (for the moment) content is planned to be accessed through internal var (theoretically "_var" is private var)</p>
-<p>Accessible node list:</p><ul>
+<p>Public Member Functions:</p><ul>
+<li>get_prop_by_name(name) <br  />
+ <code>Will return a Prop item by calling : BindingProps.prop_from_name(name) functions</code></li>
+<li>required() <br  />
+ <code>Will return required properties list (str)</code></li>
+<li>optional() <br  />
+ <code>Will return optional properties list (str)</code></li>
+</ul>
+<p>Public Attributes:</p><ul>
+<li>file_name</li>
 <li>id</li>
 <li>schema</li>
 <li>maintainers</li>
 <li>title</li>
-<li>properties (BindingProps class)</li>
 <li>examples</li>
 </ul>
 <h2><a class="anchor" id="autotoc_md7"></a>
 BindingProps</h2>
-<p><code>/!\ Need a rework (see docs)</code></p>
 <p>This class represent properties of a binding. It stand to be initialized by a Binding class and access through it. This class var will also contains binding properties of included bindings (e.g. using "allOf/$ref")</p>
-<p>This class content is planned to be access through internal var (theoretically "_var" is private var).</p>
-<p>Accessible node list:</p><ul>
-<li>required (str list of all required properties)</li>
-<li>optional (same for opional properties)</li>
-<li>prop (A python dict containing properties meant to be access using above list item as key)</li>
-</ul>
+<p>All member functions should be called by a Binding class for initializing</p>
 <h1><a class="anchor" id="autotoc_md8"></a>
 Usage</h1>
 <h2><a class="anchor" id="autotoc_md9"></a>
 Linux:</h2>
-<p>sudo apt install swig python3 python3-ruamel.yaml pip3 install -r ./requirement.txt</p>
-<p>Then juste add bindings.py to your project and let's go <code>¯\_(ツ)_/¯</code> !</p>
+<pre class="fragment">sudo apt install swig python3 python3-ruamel.yaml
+pip3 install -r ./requirement.txt
+</pre><p>Then juste add bindings.py to your project and let's go <code>¯\_(ツ)_/¯</code> !</p>
 <h1><a class="anchor" id="autotoc_md10"></a>
 Devicetree files</h1>
 <p>wget-ed from <a href="https://www.kernel.org/doc/Documentation/devicetree/bindings/">https://www.kernel.org/doc/Documentation/devicetree/bindings/</a></p>

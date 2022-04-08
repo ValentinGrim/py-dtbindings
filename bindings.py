@@ -1,7 +1,8 @@
 ##
-#	@author 	Valentin Monnot
+#	@files		 bindings.py
+#	@author		Valentin Monnot
 #	@copyright 	SPDX-License-Identifier: MIT
-#	@version	v1.0
+#	@version	v1.1
 #	@date 		2022
 
 import os, sys, time
@@ -322,12 +323,21 @@ class Binding:
 					else:
 						#TODO:  Same as above
 						name = item['$ref'].split('#')[0].replace('.yaml','')
-						name = name.rsplit('/',1)[0]
-						path = self._files_dict[name]
 
-				if self._verbose > 2:
-					print("[INFO]: Binding <%s> loading $ref <%s>" % (self.file_name, path))
-				self._refs.append(Binding(path,self._files_dict,self._verbose))
+						if '/' in name:
+							name = name.rsplit('/',1)[1]
+
+						try:
+							path = self._files_dict[name]
+						except KeyError:
+							path = None
+							if self._verbose:
+								print("[WARN]: <%s> not found for <%s>. Is path correct ?" % (item['$ref'].split('#')[0], self.file_name))
+
+				if path:
+					if self._verbose > 2:
+						print("[INFO]: Binding <%s> loading $ref <%s>" % (self.file_name, path))
+					self._refs.append(Binding(path,self._files_dict,self._verbose))
 
 			if 'if' in item:
 				self._if.append(item)
