@@ -89,10 +89,17 @@ $(document).ready(function(){initNavTree('todo.html',''); initResizable(); });
 </div><!--header-->
 <div class="contents">
 <div class="textblock"><dl class="reflist">
-<dt>Class <a class="el" href="classbindings_1_1_binding_props.html">bindings.BindingProps</a>  </dt>
-<dd><a class="anchor" id="_todo000001"></a>Find a way to load type for prop from schema if so and from prop themself otherway  </dd>
+<dt>Member <a class="el" href="classbindings_1_1_binding_props.html#a68eb2927edb65edd654f5514b9e4b316">bindings.BindingProps._get_type</a>  (self, key, item)</dt>
+<dd><a class="anchor" id="_todo000002"></a>All case not or partially process (see TODO:):<ul>
+<li>Item dict with '$ref' that is not schema and no 'type'<br  />
+</li>
+<li>Item dict with '$ref' that's not part of bindings.dtschema_types dict<br  />
+</li>
+<li>Item that doesn't fit in any if else  </li>
+</ul>
+</dd>
 <dt>Member <a class="el" href="classbindings_1_1_s_d_t_bindings.html#a1c63aef9ae3148c0a0d35d1cb37d8e4c">bindings.SDTBindings._compat_extractor</a>  (self, key, compat)</dt>
-<dd><a class="anchor" id="_todo000002"></a>Process compatible with "pattern"<br  />
+<dd><a class="anchor" id="_todo000001"></a>Process compatible with "pattern"<br  />
  Process "snps,dwmac" </dd>
 </dl>
 </div></div><!-- contents -->

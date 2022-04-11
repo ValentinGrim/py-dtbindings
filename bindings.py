@@ -20,13 +20,56 @@ from typing import NamedTuple, Any
 dtschema = os.path.expanduser("~/.local/lib/python3.8/site-packages/dtschema")
 
 ##
-#	@var		static_types
+#	@var		nodes_types
 #	@brief		This dict is used to store node type information for
 #				"standard" and static properties
-static_types = { 'reg' 		: 	[('unsigned int', 'base_address'),
-							 	 ('unsigned int', 'reg_size'	)],
-				'clocks' 	: 	[('phandle'		, 'clock'		),
+nodes_types = {'clocks' 	: 	[('void *'		, 'clock'		),
 								 ('unsigned int', 'clock_id'	)]}
+
+##
+#	@var 		dtschema_types
+#	@brief		This dict contains an exhaustive list of all dt type as key
+#				where value is the C equivalent
+#	@details	These types are comming from dtschema/type.yaml
+#
+dtschema_types = {	"flag"						 : "bool",
+					"cell"						: "uint32_t",
+					"string"					: "char *",
+					"non-unique-string-array" 	: "char **",
+					"string-array" 				: "char **",
+					"uint8-item"				: "uint8_t",
+					"uint8" 					: "uint8_t",
+					"uint8-array" 				: "uint8_t *",
+					"uint8-matrix"	 			: "uint8_t **",
+					"int8-item" 				: "int8_t",
+					"int8"						: "int8_t",
+					"int8-array"	 			: "int8_t *",
+					"int8-matrix"	 			: "int8_t **",
+					"uint16-item" 				: "uint16_t",
+					"uint16"	 				: "uint16_t",
+					"uint16-array"	 			: "uint16_t *",
+					"uint16-matrix" 			: "uint16_t **",
+					"int16-item" 				: "int16_t",
+					"int16" 					: "int16_t",
+					"int16-array" 				: "int16_t *",
+					"int16-matrix" 				: "int16_t **",
+					"uint32-item"	 			: "uint32_t",
+					"uint32"	 				: "uint32_t",
+					"uint32-array"	 			: "uint32_t *",
+					"uint32-matrix" 			: "uint32_t **",
+					"int32-item"	 			: "int32_t",
+					"int32"		 				: "int32_t",
+					"int32-array"	 			: "int32_t *",
+					"int32-matrix"	 			: "int32_t **",
+					"uint64"	 				: "uint64_t",
+					"uint64-array"	 			: "uint64_t *",
+					"uint64-matrix" 			: "uint64_t **",
+					"int64-item"	 			: "int64_t",
+					"int64"		 				: "int64_t",
+					"int64-array"	 			: "int64_t *",
+					"int64-matrix"	 			: "int64_t **",
+					"phandle"					: "void *",
+					"phandle-array"				: "void *"}
 
 ##
 #	@class		SDTBindings
@@ -68,6 +111,8 @@ class SDTBindings:
 				for file in filenames:
 					if ".yaml" in file:
 						self._files_dict.update({file.split('.')[0] : dirpath + "/" + file})
+
+		_init_dtschema_list()
 
 		# Init compatible dict
 
@@ -240,8 +285,7 @@ class Binding:
 		##
 		#	@var	_props
 		#	Internal reference on BindingProps containing properties information
-		self._props 	= BindingProps()
-
+		self._props 	= BindingProps(verbose)
 		##
 		#	@var	file_name
 		#	The YAML file name represented by this class
@@ -405,7 +449,7 @@ class Binding:
 		return self._props._required
 
 	##
-	#	@fn			optional(self)
+	#	@fn			optional(self) Update this readme !
 	#	@brief		The clean way to retrieve BindingProps._optional
 	#	@return		BindingProps._optional
 	def optional(self):
@@ -434,15 +478,13 @@ class Prop(NamedTuple):
 class MainProp(NamedTuple):
 	name: str
 	value: Any
-	type: str
+	type: Any
 
 ##
 #	@class		BindingProps
 #	@brief		This class represent the binding properties of a Binding class
-#	@todo 		Find a way to load type for prop from schema if so and from prop
-#				themself otherway
 class BindingProps:
-	def __init__(self):
+	def __init__(self, verbose):
 		##
 		#	@var	_props
 		#	A dict Contains properties formatted with Prop
@@ -455,6 +497,10 @@ class BindingProps:
 		#	@var	_optional
 		#	A list of all optional properties
 		self._optional = []
+		##
+		#	@var	_verbose
+		#	Internal reference for printing debug level (0 to 3)
+		self._verbose 	= verbose
 
 	##
 	#	@fn			add_required(self, required)
@@ -585,5 +631,114 @@ class BindingProps:
 			# Return literal, it will be the Prop.value
 			return item
 
+	##
+	#	@fn			_get_type(self, key, item)
+	#	@brief		Called by add_properties() to retrieve MainProp type
+	#	@todo		All case not or partially process (see TODO:):
+	#				- Item dict with '$ref' that is not schema and no 'type'\n
+	#				- Item dict with '$ref' that's not part of bindings.dtschema_types dict\n
+	#				- Item that doesn't fit in any if else
 	def _get_type(self, key, item):
-		return key
+		if key in nodes_types.keys():
+			return nodes_types[key]
+		else:
+			if isinstance(item, dict):
+				if '$ref' in item.keys():
+					# A type has been given by the vendor, nice job !
+					ref = item['$ref']
+
+					if '/schemas/' in ref:
+						try:
+							return dtschema_types[ref.rsplit('/',1)[1]]
+						except KeyError:
+							# TODO: Maybe ? idk if graph is usefull for TF-M ?
+							if self._verbose > 1:
+								print("[WARN]: Unknown type %s for %s, set it to unknown" % (ref.rsplit('/',1)[1],key))
+							return 'unknown'
+					else:
+						if not 'type' in item.keys():
+							# TODO: Here there is some 'phy', 'phy-device' or 'mdio'
+							# Idk what to do with that
+							return 'unknown'
+						else:
+							return item['type']
+
+				elif 'type' in item.keys():
+					# A type has been given by the vendor, nice job !
+					type = item['type']
+					if type == "object":
+						return "object"
+					elif type == "boolean":
+						return "bool"
+					else:
+						# for what i know, there is no f***in way we fall here
+						print("[WARN]: Unconventional type %s for %s" % (type,key))
+						return "unknown"
+				else:
+					if not '#' in key:
+						# Usually give name of member for a given array
+						# e.g reg and reg-name work together
+						# We might use reg-name to name C var of all reg member
+						# beside of a single reg array
+						if "name" in key:
+							return "name"
+						else:
+							# Vendor should give a type for each nodes that not's
+							# part of dtschema, so rip.
+							return "unknown"
+					else:
+						# Idk which type give to #****-**** properties
+						# As they wont be in the output, they are "fixed"
+						# And they usually describe a number of cells
+						# Admit their none so we might be able to retrieve these
+						# ez if needed
+						return "none"
+
+			if '#' in key:
+				return 'none'
+			# TODO: Else all ???
+			return "unknown"
+
+##
+#	@fn			_init_dtschema_list()
+#	@brief		Init a list of type from dtschemas
+#	@details	This fct is called by SDTBindings __init__()
+#				It will load every YAML in dtschema python lib and update
+#				#nodes_types dict with the ones given by dtschemas
+def _init_dtschema_list():
+	files_dict = {}
+
+	for dirpath, _, filenames in os.walk(dtschema):
+		if dirpath != dtschema and not "meta-schemas" in dirpath:
+			for file in filenames:
+				if ".yaml" in file:
+					files_dict.update({file.split('.')[0] : dirpath + "/" + file})
+
+	types_dict = {}
+
+	for _, path in files_dict.items():
+		if "graph.yaml" in path:
+			continue
+		try:
+			file_t = open(path,'r')
+		except OSError:
+			print("[ERR ]: Cannot open", path)
+			sys.exit(-1)
+
+		yaml_t = yaml.load(file_t, Loader=yaml.FullLoader)
+
+		if "properties" in yaml_t.keys():
+			props_t = yaml_t['properties']
+			for key,value in props_t.items():
+				if isinstance(value,dict):
+					if "$ref" in value.keys():
+						try:
+							type_t = value["$ref"].rsplit('/',1)[1]
+						except IndexError:
+							if value["$ref"] == "#":
+								type_t = 'phandle'
+							else:
+								print(value)
+								sys.exit(-1)
+						types_dict.update({key : dtschema_types[type_t]})
+		nodes_types.update(types_dict)

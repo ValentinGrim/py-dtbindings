@@ -3,7 +3,7 @@ var classbindings_1_1_binding =
     [ "_init_allOf", "classbindings_1_1_binding.html#a00ee437af79a49c61f4f74828bfae4b5", null ],
     [ "_init_Properties", "classbindings_1_1_binding.html#ab02b256080ea8f95ab15d87fda4aae12", null ],
     [ "get_prop_by_name", "classbindings_1_1_binding.html#a4191e5728779b38e112e3ad4367eddf0", null ],
-    [ "optional", "classbindings_1_1_binding.html#aa3f90e6d63934dbba00928347b02c387", null ],
+    [ "optional", "classbindings_1_1_binding.html#ad003c5740a67be8fad81a89438c526bc", null ],
     [ "required", "classbindings_1_1_binding.html#a1320297716bc79b02550476cc6c49e5a", null ],
     [ "_content", "classbindings_1_1_binding.html#a915003674a0fdcc8384d9332d023fa4b", null ],
     [ "_file", "classbindings_1_1_binding.html#acb8a9435d2ba348a04e38e4b9d18ea74", null ],

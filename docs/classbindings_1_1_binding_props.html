@@ -121,9 +121,9 @@ Private Member Functions</h2></td></tr>
 <tr class="memitem:af35096c0dbb226e3e22318076bb5f439"><td class="memItemLeft" align="right" valign="top">def&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classbindings_1_1_binding_props.html#af35096c0dbb226e3e22318076bb5f439">_value_analyzer</a> (self, item)</td></tr>
 <tr class="memdesc:af35096c0dbb226e3e22318076bb5f439"><td class="mdescLeft">&#160;</td><td class="mdescRight">Analyze value type of input and process it.  <a href="classbindings_1_1_binding_props.html#af35096c0dbb226e3e22318076bb5f439">More...</a><br /></td></tr>
 <tr class="separator:af35096c0dbb226e3e22318076bb5f439"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a408f24e7d994a6a4e24dfcf2beb9cecf"><td class="memItemLeft" align="right" valign="top"><a id="a408f24e7d994a6a4e24dfcf2beb9cecf"></a>
-def&#160;</td><td class="memItemRight" valign="bottom"><b>_get_type</b> (self, key, item)</td></tr>
-<tr class="separator:a408f24e7d994a6a4e24dfcf2beb9cecf"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a68eb2927edb65edd654f5514b9e4b316"><td class="memItemLeft" align="right" valign="top">def&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classbindings_1_1_binding_props.html#a68eb2927edb65edd654f5514b9e4b316">_get_type</a> (self, key, item)</td></tr>
+<tr class="memdesc:a68eb2927edb65edd654f5514b9e4b316"><td class="mdescLeft">&#160;</td><td class="mdescRight">Called by <a class="el" href="classbindings_1_1_binding_props.html#a1a952ea01fde268daebf630f59b81dd8" title="Init or update _optional and _props.">add_properties()</a> to retrieve <a class="el" href="classbindings_1_1_main_prop.html" title="This NamedTuple represent a single property and its value(s)">MainProp</a> type.  <a href="classbindings_1_1_binding_props.html#a68eb2927edb65edd654f5514b9e4b316">More...</a><br /></td></tr>
+<tr class="separator:a68eb2927edb65edd654f5514b9e4b316"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pri-attribs"></a>
 Private Attributes</h2></td></tr>
@@ -133,11 +133,64 @@ Private Attributes</h2></td></tr>
 <tr class="separator:a1f84445dc68603c09a322645c15ac239"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a9a556496e492fabf294e86e6906db7e1"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classbindings_1_1_binding_props.html#a9a556496e492fabf294e86e6906db7e1">_optional</a></td></tr>
 <tr class="separator:a9a556496e492fabf294e86e6906db7e1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8b9535c8b32fe018fc57a3ba5a466b0a"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classbindings_1_1_binding_props.html#a8b9535c8b32fe018fc57a3ba5a466b0a">_verbose</a></td></tr>
+<tr class="separator:a8b9535c8b32fe018fc57a3ba5a466b0a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>This class represent the binding properties of a <a class="el" href="classbindings_1_1_binding.html" title="This class represent a binding document.">Binding</a> class. </p>
-<dl class="todo"><dt><b><a class="el" href="todo.html#_todo000001">Todo:</a></b></dt><dd>Find a way to load type for prop from schema if so and from prop themself otherway </dd></dl>
 </div><h2 class="groupheader">Member Function Documentation</h2>
+<a id="a68eb2927edb65edd654f5514b9e4b316"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a68eb2927edb65edd654f5514b9e4b316">&#9670;&nbsp;</a></span>_get_type()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">def bindings.BindingProps._get_type </td>
+          <td>(</td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname"><em>self</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname"><em>key</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname"><em>item</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Called by <a class="el" href="classbindings_1_1_binding_props.html#a1a952ea01fde268daebf630f59b81dd8" title="Init or update _optional and _props.">add_properties()</a> to retrieve <a class="el" href="classbindings_1_1_main_prop.html" title="This NamedTuple represent a single property and its value(s)">MainProp</a> type. </p>
+<dl class="todo"><dt><b><a class="el" href="todo.html#_todo000002">Todo:</a></b></dt><dd>All case not or partially process (see TODO:):<ul>
+<li>Item dict with '$ref' that is not schema and no 'type'<br  />
+</li>
+<li>Item dict with '$ref' that's not part of bindings.dtschema_types dict<br  />
+</li>
+<li>Item that doesn't fit in any if else </li>
+</ul>
+</dd></dl>
+
+</div>
+</div>
 <a id="af3d16b487f9cc6a6544cab287ad1568f"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#af3d16b487f9cc6a6544cab287ad1568f">&#9670;&nbsp;</a></span>_update()</h2>
 
@@ -382,6 +435,29 @@ Private Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 <p>A list of all required properties </p>
+
+</div>
+</div>
+<a id="a8b9535c8b32fe018fc57a3ba5a466b0a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a8b9535c8b32fe018fc57a3ba5a466b0a">&#9670;&nbsp;</a></span>_verbose</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">bindings.BindingProps._verbose</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p>Internal reference for printing debug level (0 to 3) </p>
 
 </div>
 </div>

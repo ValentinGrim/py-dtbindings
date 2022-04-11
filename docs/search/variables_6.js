@@ -1,5 +1,4 @@
 var searchData=
 [
-  ['schema_78',['schema',['../classbindings_1_1_binding.html#aa63b422adce42d279e32a9e20b792e33',1,'bindings::Binding']]],
-  ['static_5ftypes_79',['static_types',['../bindings_8py.html#af03895848b5a9b7dde9af9d6f4a9dc59',1,'bindings']]]
+  ['nodes_5ftypes_82',['nodes_types',['../bindings_8py.html#a9a40866c6d8e153d7a6372ed29a4e160',1,'bindings']]]
 ];
