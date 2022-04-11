@@ -7,7 +7,6 @@
 [Doxygen on github.io](https://valentingrim.github.io/py-dtbindings/)
 
 ## TODO
-- Update this readme !
 - [Docs TODO Page ](https://valentingrim.github.io/py-dtbindings/todo.html)
 
 
