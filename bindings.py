@@ -33,6 +33,7 @@ nodes_types = {'clocks' 	: 	[('void *'		, 'clock'		),
 #	@details	These types are comming from dtschema/type.yaml
 #
 dtschema_types = {	"flag"						 : "bool",
+					"boolean"					: "bool",
 					"cell"						: "uint32_t",
 					"string"					: "char *",
 					"non-unique-string-array" 	: "char **",
@@ -69,7 +70,8 @@ dtschema_types = {	"flag"						 : "bool",
 					"int64-array"	 			: "int64_t *",
 					"int64-matrix"	 			: "int64_t **",
 					"phandle"					: "void *",
-					"phandle-array"				: "void *"}
+					"phandle-array"				: "void *",
+					"object"					: "object"}
 
 ##
 #	@class		SDTBindings
@@ -449,7 +451,7 @@ class Binding:
 		return self._props._required
 
 	##
-	#	@fn			optional(self) Update this readme !
+	#	@fn			optional(self)
 	#	@brief		The clean way to retrieve BindingProps._optional
 	#	@return		BindingProps._optional
 	def optional(self):
@@ -717,7 +719,7 @@ def _init_dtschema_list():
 	types_dict = {}
 
 	for _, path in files_dict.items():
-		if "graph.yaml" in path:
+		if 'graph.yaml' in path:
 			continue
 		try:
 			file_t = open(path,'r')
@@ -727,11 +729,13 @@ def _init_dtschema_list():
 
 		yaml_t = yaml.load(file_t, Loader=yaml.FullLoader)
 
-		if "properties" in yaml_t.keys():
+		if 'properties' in yaml_t.keys():
 			props_t = yaml_t['properties']
 			for key,value in props_t.items():
+				if key in nodes_types.keys():
+					continue
 				if isinstance(value,dict):
-					if "$ref" in value.keys():
+					if '$ref' in value.keys():
 						try:
 							type_t = value["$ref"].rsplit('/',1)[1]
 						except IndexError:
@@ -741,4 +745,29 @@ def _init_dtschema_list():
 								print(value)
 								sys.exit(-1)
 						types_dict.update({key : dtschema_types[type_t]})
+					elif 'anyOf' in value.keys():
+						list_t = []
+						for item in value['anyOf']:
+							if '$ref' in item.keys():
+								list_t.append(dtschema_types[item['$ref'].rsplit('/',1)[1]])
+							elif 'type' in item.keys():
+								list_t.append(dtschema_types[item['type']])
+						if len(list_t) == 1:
+							types_dict.update({key : list_t[0]})
+						else:
+							types_dict.update({key : tuple(list_t)})
+					elif 'oneOf' in value.keys():
+						list_t = []
+						for item in value['oneOf']:
+							if '$ref' in item.keys():
+								list_t.append(item['$ref'].rsplit('/',1)[1])
+							elif 'type' in item.keys():
+								list_t.append(item['type'])
+						if len(list_t) == 1:
+							types_dict.update({key : list_t[0]})
+						else:
+							types_dict.update({key : tuple(list_t)})
+					else:
+						pass
+						#print(value)
 		nodes_types.update(types_dict)
