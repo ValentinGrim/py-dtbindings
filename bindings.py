@@ -13,9 +13,9 @@ from typing import NamedTuple, Any
 
 ##
 #	@var		dtschema
-#	@brief		Path to dtschema python library in order to access to schema
-#	@details	This path may need to be more dynamic one day but as
-#				most user will have de same path (on linux platform)
+#	@brief		Path to dtschema python library in order to access schemas
+#	@details	This path may need to be more dynamic one day,but as
+#				most user will have the same path (on linux platform)
 #				that's static for now. And you always can modify it as you want
 dtschema = os.path.expanduser("~/.local/lib/python3.8/site-packages/dtschema")
 
@@ -24,11 +24,11 @@ dtschema = os.path.expanduser("~/.local/lib/python3.8/site-packages/dtschema")
 #	@brief		This dict is used to store node type information for
 #				"standard" and static properties
 nodes_types = {'clocks' 	: 	[('void *'		, 'clock'		),
-								 ('unsigned int', 'clock_id'	)]}
+								 ('uint32_t', 'clock_id'	)]}
 
 ##
 #	@var 		dtschema_types
-#	@brief		This dict contains an exhaustive list of all dt type as key
+#	@brief		This dict contains an exhaustive list of all dt types as key
 #				where value is the C equivalent
 #	@details	These types are comming from dtschema/type.yaml
 #

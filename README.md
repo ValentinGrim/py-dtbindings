@@ -16,7 +16,7 @@ This is the root class, this is the one that should be called.
 Give it the path of your local copy of bindings and it will load it.
 
 - It will search for every YAML file in provided dir and subdir
-- It will attemp to decode it and make is own list of compatible.
+- It will attempt to decode it and make is own list of compatible.
 
 As there is an internal list of compatible pointing on file its related to,
 you should call get_binding method to retrieve a Binding from a given compatible  
@@ -24,7 +24,7 @@ you should call get_binding method to retrieve a Binding from a given compatible
 
 ### Binding
 
-This class class represent a binding :)
+This class represents a binding :)
 
 - It will load the provided binding
 - It will extract main information (e.g. id, schema, properties, required ...)
@@ -49,9 +49,9 @@ Public Attributes:
 
 ### BindingProps
 
-This class represent properties of a binding.
-It stand to be initialized by a Binding class and access through it.
-This class var will also contains binding properties of included bindings
+This class represents the properties of a binding.
+It stands to be initialized by a Binding class and access through it.
+This class var will also contain binding properties of included bindings
 (e.g. using "allOf/$ref")
 
 All member functions should be called by a Binding class for initializing
@@ -69,7 +69,7 @@ wget-ed from https://www.kernel.org/doc/Documentation/devicetree/bindings/
 
 ## Contribute
 Feel free to improve this as you want and share it !
-Also I'm listening to any comments !
+Also, I'm listening to any comments !
 
 ## Third Party
 - [Doxygen Awesome](https://github.com/jothepro/doxygen-awesome-css)
