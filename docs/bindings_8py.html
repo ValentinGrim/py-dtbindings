@@ -120,13 +120,13 @@ Functions</h2></td></tr>
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="var-members"></a>
 Variables</h2></td></tr>
 <tr class="memitem:adb6bd868702ea08fb5cd119f4358bcb4"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="bindings_8py.html#adb6bd868702ea08fb5cd119f4358bcb4">bindings.dtschema</a> = os.path.expanduser(&quot;~/.local/lib/python3.8/site-packages/dtschema&quot;)</td></tr>
-<tr class="memdesc:adb6bd868702ea08fb5cd119f4358bcb4"><td class="mdescLeft">&#160;</td><td class="mdescRight">Path to dtschema python library in order to access to schema.  <a href="bindings_8py.html#adb6bd868702ea08fb5cd119f4358bcb4">More...</a><br /></td></tr>
+<tr class="memdesc:adb6bd868702ea08fb5cd119f4358bcb4"><td class="mdescLeft">&#160;</td><td class="mdescRight">Path to dtschema python library in order to access schemas.  <a href="bindings_8py.html#adb6bd868702ea08fb5cd119f4358bcb4">More...</a><br /></td></tr>
 <tr class="separator:adb6bd868702ea08fb5cd119f4358bcb4"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a9a40866c6d8e153d7a6372ed29a4e160"><td class="memItemLeft" align="right" valign="top">dictionary&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="bindings_8py.html#a9a40866c6d8e153d7a6372ed29a4e160">bindings.nodes_types</a></td></tr>
 <tr class="memdesc:a9a40866c6d8e153d7a6372ed29a4e160"><td class="mdescLeft">&#160;</td><td class="mdescRight">This dict is used to store node type information for "standard" and static properties.  <a href="bindings_8py.html#a9a40866c6d8e153d7a6372ed29a4e160">More...</a><br /></td></tr>
 <tr class="separator:a9a40866c6d8e153d7a6372ed29a4e160"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a2385d3d176d6e273dbe3472704e12043"><td class="memItemLeft" align="right" valign="top">dictionary&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="bindings_8py.html#a2385d3d176d6e273dbe3472704e12043">bindings.dtschema_types</a></td></tr>
-<tr class="memdesc:a2385d3d176d6e273dbe3472704e12043"><td class="mdescLeft">&#160;</td><td class="mdescRight">This dict contains an exhaustiv list of all dt type as key where value is the C equivalent.  <a href="bindings_8py.html#a2385d3d176d6e273dbe3472704e12043">More...</a><br /></td></tr>
+<tr class="memdesc:a2385d3d176d6e273dbe3472704e12043"><td class="mdescLeft">&#160;</td><td class="mdescRight">This dict contains an exhaustive list of all dt types as key where value is the C equivalent.  <a href="bindings_8py.html#a2385d3d176d6e273dbe3472704e12043">More...</a><br /></td></tr>
 <tr class="separator:a2385d3d176d6e273dbe3472704e12043"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
@@ -176,8 +176,8 @@ Variables</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>Path to dtschema python library in order to access to schema. </p>
-<p>This path may need to be more dynamic one day but as most user will have de same path (on linux platform) that's static for now. And you always can modify it as you want </p>
+<p>Path to dtschema python library in order to access schemas. </p>
+<p>This path may need to be more dynamic one day,but as most user will have the same path (on linux platform) that's static for now. And you always can modify it as you want </p>
 
 </div>
 </div>
@@ -193,7 +193,7 @@ Variables</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>This dict contains an exhaustiv list of all dt type as key where value is the C equivalent. </p>
+<p>This dict contains an exhaustive list of all dt types as key where value is the C equivalent. </p>
 <p>These types are comming from dtschema/type.yaml </p>
 
 </div>
@@ -210,7 +210,7 @@ Variables</h2></td></tr>
       </table>
 </div><div class="memdoc">
 <b>Initial value:</b><div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;=  {<span class="stringliteral">&#39;clocks&#39;</span>    :   [(<span class="stringliteral">&#39;void *&#39;</span>      , <span class="stringliteral">&#39;clock&#39;</span>       ),</div>
-<div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160;                                 (<span class="stringliteral">&#39;unsigned int&#39;</span>, <span class="stringliteral">&#39;clock_id&#39;</span>    )]}</div>
+<div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160;                                 (<span class="stringliteral">&#39;uint32_t&#39;</span>, <span class="stringliteral">&#39;clock_id&#39;</span>    )]}</div>
 </div><!-- fragment -->
 <p>This dict is used to store node type information for "standard" and static properties. </p>
 

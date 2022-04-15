@@ -41,6 +41,10 @@ var NAVTREE =
     [ "License", "md__l_i_c_e_n_s_e.html", [
       [ "MIT License", "md__l_i_c_e_n_s_e.html#autotoc_md1", null ]
     ] ],
+    [ "Workflow", "md_docs_workflow.html", [
+      [ "Initialization", "md_docs_workflow.html#autotoc_md17", null ],
+      [ "Get bindings", "md_docs_workflow.html#autotoc_md18", null ]
+    ] ],
     [ "Todo List", "todo.html", null ],
     [ "Classes", "annotated.html", [
       [ "Class List", "annotated.html", "annotated_dup" ],

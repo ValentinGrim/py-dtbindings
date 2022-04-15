@@ -106,13 +106,13 @@ SDTBindings</h2>
 <p>This is the root class, this is the one that should be called. Give it the path of your local copy of bindings and it will load it.</p>
 <ul>
 <li>It will search for every YAML file in provided dir and subdir</li>
-<li>It will attemp to decode it and make is own list of compatible.</li>
+<li>It will attempt to decode it and make is own list of compatible.</li>
 </ul>
 <p>As there is an internal list of compatible pointing on file its related to, you should call get_binding method to retrieve a Binding from a given compatible <br  />
  (e.g. myBinding = mySDTBindings.get_binding("gpio-keys") will return a Binding object created from gpio-keys.yaml binding)</p>
 <h2><a class="anchor" id="autotoc_md8"></a>
 Binding</h2>
-<p>This class class represent a binding :)</p>
+<p>This class represents a binding :)</p>
 <ul>
 <li>It will load the provided binding</li>
 <li>It will extract main information (e.g. id, schema, properties, required ...)</li>
@@ -136,7 +136,7 @@ Binding</h2>
 </ul>
 <h2><a class="anchor" id="autotoc_md9"></a>
 BindingProps</h2>
-<p>This class represent properties of a binding. It stand to be initialized by a Binding class and access through it. This class var will also contains binding properties of included bindings (e.g. using "allOf/$ref")</p>
+<p>This class represents the properties of a binding. It stands to be initialized by a Binding class and access through it. This class var will also contain binding properties of included bindings (e.g. using "allOf/$ref")</p>
 <p>All member functions should be called by a Binding class for initializing</p>
 <h1><a class="anchor" id="autotoc_md10"></a>
 Usage</h1>
@@ -150,7 +150,7 @@ Devicetree files</h1>
 <p>wget-ed from <a href="https://www.kernel.org/doc/Documentation/devicetree/bindings/">https://www.kernel.org/doc/Documentation/devicetree/bindings/</a></p>
 <h1><a class="anchor" id="autotoc_md13"></a>
 Contribute</h1>
-<p>Feel free to improve this as you want and share it ! Also I'm listening to any comments !</p>
+<p>Feel free to improve this as you want and share it ! Also, I'm listening to any comments !</p>
 <h1><a class="anchor" id="autotoc_md14"></a>
 Third Party</h1>
 <ul>
