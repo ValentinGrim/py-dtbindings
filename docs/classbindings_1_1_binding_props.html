@@ -27,7 +27,7 @@
  <tr style="height: 56px;">
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">py-dtbindings
-   &#160;<span id="projectnumber">1.2</span>
+   &#160;<span id="projectnumber">dev</span>
    </div>
    <div id="projectbrief">This python &quot;lib&quot; aim is to extract devicetree bindings informations.</div>
   </td>
@@ -138,6 +138,7 @@ Private Attributes</h2></td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>This class represent the binding properties of a <a class="el" href="classbindings_1_1_binding.html" title="This class represent a binding document.">Binding</a> class. </p>
+<dl class="todo"><dt><b><a class="el" href="todo.html#_todo000001">Todo:</a></b></dt><dd>Different algorithme cloud be rework as they could be more clean and efficient since we had <b>contains</b> and <b>getitem</b> to <a class="el" href="classbindings_1_1_main_prop.html" title="This NamedTuple represent a single property and its value(s)">MainProp</a> </dd></dl>
 </div><h2 class="groupheader">Member Function Documentation</h2>
 <a id="a68eb2927edb65edd654f5514b9e4b316"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a68eb2927edb65edd654f5514b9e4b316">&#9670;&nbsp;</a></span>_get_type()</h2>
@@ -180,7 +181,7 @@ Private Attributes</h2></td></tr>
 </div><div class="memdoc">
 
 <p>Called by <a class="el" href="classbindings_1_1_binding_props.html#a1a952ea01fde268daebf630f59b81dd8" title="Init or update _optional and _props.">add_properties()</a> to retrieve <a class="el" href="classbindings_1_1_main_prop.html" title="This NamedTuple represent a single property and its value(s)">MainProp</a> type. </p>
-<dl class="todo"><dt><b><a class="el" href="todo.html#_todo000002">Todo:</a></b></dt><dd>All case not or partially process (see TODO:):<ul>
+<dl class="todo"><dt><b><a class="el" href="todo.html#_todo000003">Todo:</a></b></dt><dd>All case not or partially process (see TODO:):<ul>
 <li>Item dict with '$ref' that is not schema and no 'type'<br  />
 </li>
 <li>Item dict with '$ref' that's not part of bindings.dtschema_types dict<br  />

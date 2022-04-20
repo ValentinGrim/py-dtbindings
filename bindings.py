@@ -482,9 +482,60 @@ class MainProp(NamedTuple):
 	value: Any
 	type: Any
 
+	def __contains__(self, item):
+		if not isinstance(item, str):
+			return False
+		return self._contains_finder(item, self.value)
+
+	def __getitem__(self, key):
+		if not isinstance(key, str):
+			return None
+		return self._getitem_finder(key, self.value)
+
+	##
+	#	@fn			_contains_finder
+	#	@brief		Recursive private method used by special method __contains__()
+	#				to find if given item is in.
+	def _contains_finder(self, name, val):
+		if isinstance(val, Prop):
+			if val.name == name:
+				return True
+			else:
+				return self._contains_finder(val.value)
+
+		elif type(val) == list:
+			for item in val:
+				bool_t = self._contains_finder(name, item)
+				if bool_t:
+					return True
+			return False
+		return False
+
+	##
+	#	@fn			_getitem_finder
+	#	@brief		Recursive private method used by special method __getitem__()
+	#				to return Prop if given Prop.name exist.
+	def _getitem_finder(self, name, val):
+		if isinstance(val, Prop):
+			if val.name == name:
+				return val
+			else:
+				return self._contains_finder(val.value)
+
+		elif type(val) == list:
+			for item in val:
+				prop_t = self._contains_finder(name, item)
+				if bool_t:
+					return prop_t
+			return None
+		return None
+
+
 ##
 #	@class		BindingProps
 #	@brief		This class represent the binding properties of a Binding class
+#	@todo		Different algorithme cloud be rework as they could be more
+#				clean and efficient since we had __contains__ and __getitem__ to MainProp
 class BindingProps:
 	def __init__(self, verbose):
 		##
@@ -575,8 +626,8 @@ class BindingProps:
 							if prop.name == 'pattern':
 								if re.match(prop.value, name):
 									return self._props[key]
-			# Else return nothing
-			return None
+		# Else return nothing
+		return None
 
 	##
 	#	@fn			_update(self)
