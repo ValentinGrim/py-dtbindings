@@ -5,7 +5,7 @@
 #	@version	v1.1
 #	@date 		2022
 
-import os, sys, time
+import os, sys
 import yaml
 import re
 
@@ -494,14 +494,14 @@ class MainProp(NamedTuple):
 
 	##
 	#	@fn			_contains_finder
-	#	@brief		Recursive private method used by special method __contains__()
+	#	@brief		Recursive private method used by special method `__contains__()`
 	#				to find if given item is in.
 	def _contains_finder(self, name, val):
 		if isinstance(val, Prop):
 			if val.name == name:
 				return True
 			else:
-				return self._contains_finder(val.value)
+				return self._contains_finder(name, val.value)
 
 		elif type(val) == list:
 			for item in val:
@@ -513,7 +513,7 @@ class MainProp(NamedTuple):
 
 	##
 	#	@fn			_getitem_finder
-	#	@brief		Recursive private method used by special method __getitem__()
+	#	@brief		Recursive private method used by special method `__getitem__()`
 	#				to return Prop if given Prop.name exist.
 	def _getitem_finder(self, name, val):
 		if isinstance(val, Prop):
@@ -584,8 +584,8 @@ class BindingProps:
 		# Init or update props list from properties
 		for key,item in properties.items():
 			value = self._value_analyzer(item)
-			type = self._get_type(key, item)
-			self._props.update({key : MainProp(key,value,type)})
+			type_t = self._get_type(key, item)
+			self._props.update({key : MainProp(key,value,type_t)})
 
 	##
 	#	@fn			add_from_BindingProp(self, prop)
@@ -600,13 +600,10 @@ class BindingProps:
 		# Remove duplicates
 		self._optional = list(dict.fromkeys(self._optional))
 		# Update
-		cpy = prop._props.copy()
-		try:
-			cpy.pop("compatible")
-		except:
-			pass
 
-		self._props.update(cpy)
+		if 'compatible' in prop._props.keys():
+			del prop._props['compatible']
+
 		self._update()
 
 	##
@@ -718,10 +715,10 @@ class BindingProps:
 
 				elif 'type' in item.keys():
 					# A type has been given by the vendor, nice job !
-					type = item['type']
-					if type == "object":
+					type_t = item['type']
+					if type_t == "object":
 						return "object"
-					elif type == "boolean":
+					elif type_t == "boolean":
 						return "bool"
 					else:
 						# for what i know, there is no f***in way we fall here
@@ -778,7 +775,7 @@ def _init_dtschema_list():
 			print("[ERR ]: Cannot open", path)
 			sys.exit(-1)
 
-		yaml_t = yaml.load(file_t, Loader=yaml.FullLoader)
+		yaml_t = yaml.safe_load(file_t)
 
 		if 'properties' in yaml_t.keys():
 			props_t = yaml_t['properties']
