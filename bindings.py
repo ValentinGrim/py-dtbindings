@@ -99,7 +99,7 @@ class SDTBindings:
 		#	@brief		Internal reference for printing debug level (0 to 3)
 		self._verbose 		= verbose
 		##
-		#	@var		_files_dict
+		#	@varDuplicated		_files_dict
 		#	@brief		Internal dict where key are filename without extension (e.g. serial)\n
 		#				value are complet path to these file
 		self._files_dict 	 = {}
@@ -322,7 +322,7 @@ class Binding:
 			print("[INFO]: If you didn't called this file, check that $ref is correctly set")
 			sys.exit(-1)
 
-		self._content = yaml.load(self._file, Loader=yaml.FullLoader)
+		self._content = yaml.safe_load(self._file)
 
 		# Loading basics information
 		self.id = self._content['$id'].replace('#','')
