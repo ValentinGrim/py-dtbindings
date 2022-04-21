@@ -494,7 +494,7 @@ class MainProp(NamedTuple):
 
 	##
 	#	@fn			_contains_finder
-	#	@brief		Recursive private method used by special method `__contains__()`
+	#	@brief		Recursive private method used by magic method `__contains__()`
 	#				to find if given item is in.
 	def _contains_finder(self, name, val):
 		if isinstance(val, Prop):
@@ -513,19 +513,19 @@ class MainProp(NamedTuple):
 
 	##
 	#	@fn			_getitem_finder
-	#	@brief		Recursive private method used by special method `__getitem__()`
+	#	@brief		Recursive private method used by magic method `__getitem__()`
 	#				to return Prop if given Prop.name exist.
 	def _getitem_finder(self, name, val):
 		if isinstance(val, Prop):
 			if val.name == name:
 				return val
 			else:
-				return self._contains_finder(val.value)
+				return self._contains_finder(name, val.value)
 
 		elif type(val) == list:
 			for item in val:
 				prop_t = self._contains_finder(name, item)
-				if bool_t:
+				if prop_t:
 					return prop_t
 			return None
 		return None
