@@ -9,15 +9,15 @@
 [Doxygen on github.io](https://valentingrim.github.io/py-dtbindings/)
 
 ## TODO
--	[Docs TODO Page ](https://valentingrim.github.io/py-dtbindings/todo.html)
+-  [Docs TODO Page ](https://valentingrim.github.io/py-dtbindings/todo.html)
 
 ## Class
 ### SDTBindings
 This is the root class, this is the one that should be called.
 Give it the path of your local copy of bindings and it will load it.
 
--	It will search for every YAML file in provided dir and subdir
--	It will attempt to decode it and make is own list of compatible.
+-  It will search for every YAML file in provided dir and subdir
+-  It will attempt to decode it and make is own list of compatible.
 
 As there is an internal list of compatible pointing on file its related to,
 you should call get_binding method to retrieve a Binding from a given compatible  
@@ -27,32 +27,31 @@ you should call get_binding method to retrieve a Binding from a given compatible
 
 This class represents a binding :)
 
--	It will load the provided binding
--	It will extract main information (e.g. id, schema, properties, required ...)
--	If there is some inclusion, it will also load them and add these properties
+-  It will load the provided binding
+-  It will extract main information (e.g. id, schema, properties, required ...)
+-  If there is some inclusion, it will also load them and add these properties
 
 Public Member Functions:
--	get_prop_by_name(name)
+-  get_prop_by_name(name)
 
 ``Will return a Prop item by calling :
 BindingProps.prop_from_name(name) functions``
 
--	required()
+-  required()
 
 ``Will return required properties list (str)``
 
--	optional()
+-  optional()
 
 ``Will return optional properties list (str)``
 
-
 Public Attributes:
--	file_name
--	id
--	schema
--	maintainers
--	title
--	examples
+-  file_name
+-  id
+-  schema
+-  maintainers
+-  title
+-  examples
 
 ### BindingProps
 
@@ -79,8 +78,8 @@ Feel free to improve this as you want and share it !
 Also, I'm listening to any comments !
 
 ## Third Party
--	[Doxygen Awesome](https://github.com/jothepro/doxygen-awesome-css)
--	[dtschema](https://github.com/devicetree-org/dt-schema)
+-  [Doxygen Awesome](https://github.com/jothepro/doxygen-awesome-css)
+-  [dtschema](https://github.com/devicetree-org/dt-schema)
 
 ## Contact
--	vmonnot@outlook.com
+-  vmonnot@outlook.com
