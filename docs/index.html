@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.8.17"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>py-dtbindings: py-dtbindings</title>
+<title>py-dtbindings: Main Page</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -85,24 +85,27 @@ $(document).ready(function(){initNavTree('index.html',''); initResizable(); });
 
 <div class="PageDoc"><div class="header">
   <div class="headertitle">
-<div class="title">py-dtbindings </div>  </div>
+<div class="title">py-dtbindings Documentation</div>  </div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"><h1><a class="anchor" id="autotoc_md3"></a>
-Brief</h1>
+<div class="textblock"><p><a href="https://www.codacy.com/gh/ValentinGrim/py-dtbindings/dashboard?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=ValentinGrim/py-dtbindings&amp;utm_campaign=Badge_Grade"><img src="https://app.codacy.com/project/badge/Grade/94eef9548a144b4c821fc6657c8fa692" alt="Codacy Badge" class="inline"/></a> <img src="https://img.shields.io/badge/license-MIT-green" alt="License" class="inline"/> </p>
+<h1><a class="anchor" id="autotoc_md2"></a>
+py-dtbindings</h1>
+<h2><a class="anchor" id="autotoc_md3"></a>
+Brief</h2>
 <p>This python "lib" aim is to extract devicetree bindings informations.</p>
-<h1><a class="anchor" id="autotoc_md4"></a>
-Documentation</h1>
+<h2><a class="anchor" id="autotoc_md4"></a>
+Documentation</h2>
 <p><a href="https://valentingrim.github.io/py-dtbindings/">Doxygen on github.io</a></p>
-<h1><a class="anchor" id="autotoc_md5"></a>
-TODO</h1>
+<h2><a class="anchor" id="autotoc_md5"></a>
+TODO</h2>
 <ul>
 <li><a href="https://valentingrim.github.io/py-dtbindings/todo.html">Docs TODO Page</a></li>
 </ul>
-<h1><a class="anchor" id="autotoc_md6"></a>
-Class</h1>
-<h2><a class="anchor" id="autotoc_md7"></a>
-SDTBindings</h2>
+<h2><a class="anchor" id="autotoc_md6"></a>
+Class</h2>
+<h3><a class="anchor" id="autotoc_md7"></a>
+SDTBindings</h3>
 <p>This is the root class, this is the one that should be called. Give it the path of your local copy of bindings and it will load it.</p>
 <ul>
 <li>It will search for every YAML file in provided dir and subdir</li>
@@ -110,8 +113,8 @@ SDTBindings</h2>
 </ul>
 <p>As there is an internal list of compatible pointing on file its related to, you should call get_binding method to retrieve a Binding from a given compatible <br  />
  (e.g. myBinding = mySDTBindings.get_binding("gpio-keys") will return a Binding object created from gpio-keys.yaml binding)</p>
-<h2><a class="anchor" id="autotoc_md8"></a>
-Binding</h2>
+<h3><a class="anchor" id="autotoc_md8"></a>
+Binding</h3>
 <p>This class represents a binding :)</p>
 <ul>
 <li>It will load the provided binding</li>
@@ -119,13 +122,17 @@ Binding</h2>
 <li>If there is some inclusion, it will also load them and add these properties</li>
 </ul>
 <p>Public Member Functions:</p><ul>
-<li>get_prop_by_name(name) <br  />
- <code>Will return a Prop item by calling : BindingProps.prop_from_name(name) functions</code></li>
-<li>required() <br  />
- <code>Will return required properties list (str)</code></li>
-<li>optional() <br  />
- <code>Will return optional properties list (str)</code></li>
+<li>get_prop_by_name(name)</li>
 </ul>
+<p><code>Will return a Prop item by calling : BindingProps.prop_from_name(name) functions</code></p>
+<ul>
+<li>required()</li>
+</ul>
+<p><code>Will return required properties list (str)</code></p>
+<ul>
+<li>optional()</li>
+</ul>
+<p><code>Will return optional properties list (str)</code></p>
 <p>Public Attributes:</p><ul>
 <li>file_name</li>
 <li>id</li>
@@ -134,33 +141,33 @@ Binding</h2>
 <li>title</li>
 <li>examples</li>
 </ul>
-<h2><a class="anchor" id="autotoc_md9"></a>
-BindingProps</h2>
+<h3><a class="anchor" id="autotoc_md9"></a>
+BindingProps</h3>
 <p>This class represents the properties of a binding. It stands to be initialized by a Binding class and access through it. This class var will also contain binding properties of included bindings (e.g. using "allOf/$ref")</p>
 <p>All member functions should be called by a Binding class for initializing</p>
-<h1><a class="anchor" id="autotoc_md10"></a>
-Usage</h1>
-<h2><a class="anchor" id="autotoc_md11"></a>
-Linux:</h2>
+<h2><a class="anchor" id="autotoc_md10"></a>
+Usage</h2>
+<h3><a class="anchor" id="autotoc_md11"></a>
+Linux</h3>
 <pre class="fragment">sudo apt install swig python3 python3-ruamel.yaml
 pip3 install -r ./requirement.txt
 </pre><p>Then juste add <a class="el" href="bindings_8py.html">bindings.py</a> to your project and let's go <code>¯\_(ツ)_/¯</code> !</p>
-<h1><a class="anchor" id="autotoc_md12"></a>
-Devicetree files</h1>
+<h2><a class="anchor" id="autotoc_md12"></a>
+Devicetree files</h2>
 <p>wget-ed from <a href="https://www.kernel.org/doc/Documentation/devicetree/bindings/">https://www.kernel.org/doc/Documentation/devicetree/bindings/</a></p>
-<h1><a class="anchor" id="autotoc_md13"></a>
-Contribute</h1>
+<h2><a class="anchor" id="autotoc_md13"></a>
+Contribute</h2>
 <p>Feel free to improve this as you want and share it ! Also, I'm listening to any comments !</p>
-<h1><a class="anchor" id="autotoc_md14"></a>
-Third Party</h1>
+<h2><a class="anchor" id="autotoc_md14"></a>
+Third Party</h2>
 <ul>
 <li><a href="https://github.com/jothepro/doxygen-awesome-css">Doxygen Awesome</a></li>
 <li><a href="https://github.com/devicetree-org/dt-schema">dtschema</a></li>
 </ul>
-<h1><a class="anchor" id="autotoc_md15"></a>
-Contact</h1>
+<h2><a class="anchor" id="autotoc_md15"></a>
+Contact</h2>
 <ul>
-<li>Valentin Monnot <a href="#" onclick="location.href='mai'+'lto:'+'vmo'+'nn'+'ot@'+'ou'+'tlo'+'ok'+'.co'+'m'; return false;">vmonn<span style="display: none;">.nosp@m.</span>ot@o<span style="display: none;">.nosp@m.</span>utloo<span style="display: none;">.nosp@m.</span>k.co<span style="display: none;">.nosp@m.</span>m</a> </li>
+<li><a href="#" onclick="location.href='mai'+'lto:'+'vmo'+'nn'+'ot@'+'ou'+'tlo'+'ok'+'.co'+'m'; return false;">vmonn<span style="display: none;">.nosp@m.</span>ot@o<span style="display: none;">.nosp@m.</span>utloo<span style="display: none;">.nosp@m.</span>k.co<span style="display: none;">.nosp@m.</span>m</a> </li>
 </ul>
 </div></div><!-- PageDoc -->
 </div><!-- contents -->

@@ -106,11 +106,11 @@ Public Member Functions</h2></td></tr>
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pri-methods"></a>
 Private Member Functions</h2></td></tr>
 <tr class="memitem:a1c63aef9ae3148c0a0d35d1cb37d8e4c"><td class="memItemLeft" align="right" valign="top">def&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classbindings_1_1_s_d_t_bindings.html#a1c63aef9ae3148c0a0d35d1cb37d8e4c">_compat_extractor</a> (self, key, compat)</td></tr>
-<tr class="memdesc:a1c63aef9ae3148c0a0d35d1cb37d8e4c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Extract compatible node from properties and init a dict like <a class="el" href="classbindings_1_1_s_d_t_bindings.html#a15376bb2b35b5bb795158960b89d8e56" title="Internal dict where key are filename without extension (e.g. serial)  value are complet path to these...">_files_dict</a> to access path through compatible.  <a href="classbindings_1_1_s_d_t_bindings.html#a1c63aef9ae3148c0a0d35d1cb37d8e4c">More...</a><br /></td></tr>
+<tr class="memdesc:a1c63aef9ae3148c0a0d35d1cb37d8e4c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Extract compatible node from properties and init a dict like #_files_dict to access path through compatible.  <a href="classbindings_1_1_s_d_t_bindings.html#a1c63aef9ae3148c0a0d35d1cb37d8e4c">More...</a><br /></td></tr>
 <tr class="separator:a1c63aef9ae3148c0a0d35d1cb37d8e4c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a26a806f7698a4e9e59316f45fa697aec"><td class="memItemLeft" align="right" valign="top"><a id="a26a806f7698a4e9e59316f45fa697aec"></a>
 def&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classbindings_1_1_s_d_t_bindings.html#a26a806f7698a4e9e59316f45fa697aec">_duplicate_checker</a> (self, item, key)</td></tr>
-<tr class="memdesc:a26a806f7698a4e9e59316f45fa697aec"><td class="mdescLeft">&#160;</td><td class="mdescRight">Used by <a class="el" href="classbindings_1_1_s_d_t_bindings.html#a1c63aef9ae3148c0a0d35d1cb37d8e4c" title="Extract compatible node from properties and init a dict like _files_dict to access path through compa...">_compat_extractor()</a> in order to check if compatible have duplicate. <br /></td></tr>
+<tr class="memdesc:a26a806f7698a4e9e59316f45fa697aec"><td class="mdescLeft">&#160;</td><td class="mdescRight">Used by <a class="el" href="classbindings_1_1_s_d_t_bindings.html#a1c63aef9ae3148c0a0d35d1cb37d8e4c" title="Extract compatible node from properties and init a dict like #_files_dict to access path through comp...">_compat_extractor()</a> in order to check if compatible have duplicate. <br /></td></tr>
 <tr class="separator:a26a806f7698a4e9e59316f45fa697aec"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pri-attribs"></a>
@@ -124,13 +124,10 @@ Private Attributes</h2></td></tr>
 <tr class="memdesc:a7f67628a6a8c90ef5441224eafa480ac"><td class="mdescLeft">&#160;</td><td class="mdescRight">Internal reference for printing debug level (0 to 3) <br /></td></tr>
 <tr class="separator:a7f67628a6a8c90ef5441224eafa480ac"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a15376bb2b35b5bb795158960b89d8e56"><td class="memItemLeft" align="right" valign="top"><a id="a15376bb2b35b5bb795158960b89d8e56"></a>
-&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classbindings_1_1_s_d_t_bindings.html#a15376bb2b35b5bb795158960b89d8e56">_files_dict</a></td></tr>
-<tr class="memdesc:a15376bb2b35b5bb795158960b89d8e56"><td class="mdescLeft">&#160;</td><td class="mdescRight">Internal dict where key are filename without extension (e.g. serial)<br  />
- value are complet path to these file. <br /></td></tr>
+&#160;</td><td class="memItemRight" valign="bottom"><b>_files_dict</b></td></tr>
 <tr class="separator:a15376bb2b35b5bb795158960b89d8e56"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a714f8a3674276aed4dbe213dce2258bd"><td class="memItemLeft" align="right" valign="top"><a id="a714f8a3674276aed4dbe213dce2258bd"></a>
-&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classbindings_1_1_s_d_t_bindings.html#a714f8a3674276aed4dbe213dce2258bd">_compat_dict</a></td></tr>
-<tr class="memdesc:a714f8a3674276aed4dbe213dce2258bd"><td class="mdescLeft">&#160;</td><td class="mdescRight">Internal reference similar to <a class="el" href="classbindings_1_1_s_d_t_bindings.html#a15376bb2b35b5bb795158960b89d8e56" title="Internal dict where key are filename without extension (e.g. serial)  value are complet path to these...">_files_dict</a> but keys are 'compatible'. <br /></td></tr>
+<tr class="memitem:a714f8a3674276aed4dbe213dce2258bd"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classbindings_1_1_s_d_t_bindings.html#a714f8a3674276aed4dbe213dce2258bd">_compat_dict</a></td></tr>
+<tr class="memdesc:a714f8a3674276aed4dbe213dce2258bd"><td class="mdescLeft">&#160;</td><td class="mdescRight">@varDuplicated _files_dict  <a href="classbindings_1_1_s_d_t_bindings.html#a714f8a3674276aed4dbe213dce2258bd">More...</a><br /></td></tr>
 <tr class="separator:a714f8a3674276aed4dbe213dce2258bd"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
@@ -186,7 +183,7 @@ Private Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p>Extract compatible node from properties and init a dict like <a class="el" href="classbindings_1_1_s_d_t_bindings.html#a15376bb2b35b5bb795158960b89d8e56" title="Internal dict where key are filename without extension (e.g. serial)  value are complet path to these...">_files_dict</a> to access path through compatible. </p>
+<p>Extract compatible node from properties and init a dict like #_files_dict to access path through compatible. </p>
 <dl class="todo"><dt><b><a class="el" href="todo.html#_todo000002">Todo:</a></b></dt><dd>Process compatible with "pattern"<br  />
  Process "snps,dwmac" </dd></dl>
 
@@ -225,6 +222,34 @@ Private Attributes</h2></td></tr>
   </table>
   </dd>
 </dl>
+
+</div>
+</div>
+<h2 class="groupheader">Member Data Documentation</h2>
+<a id="a714f8a3674276aed4dbe213dce2258bd"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a714f8a3674276aed4dbe213dce2258bd">&#9670;&nbsp;</a></span>_compat_dict</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">bindings.SDTBindings._compat_dict</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>@varDuplicated _files_dict </p>
+<p>Internal dict where key are filename without extension (e.g. serial)<br  />
+ value are complet path to these file</p>
+<p>Internal reference similar to #_files_dict but keys are 'compatible' </p>
 
 </div>
 </div>

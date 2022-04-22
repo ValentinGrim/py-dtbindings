@@ -1,5 +1,5 @@
 ##
-#	@file		 bindings.py
+#	@file		bindings.py
 #	@author		Valentin Monnot
 #	@copyright 	SPDX-License-Identifier: MIT
 #	@version	v1.1
@@ -15,63 +15,63 @@ from typing import NamedTuple, Any
 #	@var		dtschema
 #	@brief		Path to dtschema python library in order to access schemas
 #	@details	This path may need to be more dynamic one day,but as
-#				most user will have the same path (on linux platform)
-#				that's static for now. And you always can modify it as you want
+#			most user will have the same path (on linux platform)
+#			that's static for now. And you always can modify it as you want
 dtschema = os.path.expanduser("~/.local/lib/python3.8/site-packages/dtschema")
 
 ##
 #	@var		nodes_types
 #	@brief		This dict is used to store node type information for
-#				"standard" and static properties
-nodes_types = {'clocks' 	: 	[('void *'		, 'clock'		),
-								 ('uint32_t', 'clock_id'	)]}
+#			"standard" and static properties
+nodes_types = {'clocks' 	:	[('void *'	, 'clock'	),
+				 	('uint32_t'	, 'clock_id'	)]}
 
 ##
 #	@var 		dtschema_types
 #	@brief		This dict contains an exhaustive list of all dt types as key
-#				where value is the C equivalent
+#			where value is the C equivalent
 #	@details	These types are comming from dtschema/type.yaml
 #
-dtschema_types = {	"flag"						 : "bool",
-					"boolean"					: "bool",
-					"cell"						: "uint32_t",
-					"string"					: "char *",
-					"non-unique-string-array" 	: "char **",
-					"string-array" 				: "char **",
-					"uint8-item"				: "uint8_t",
-					"uint8" 					: "uint8_t",
-					"uint8-array" 				: "uint8_t *",
-					"uint8-matrix"	 			: "uint8_t **",
-					"int8-item" 				: "int8_t",
-					"int8"						: "int8_t",
-					"int8-array"	 			: "int8_t *",
-					"int8-matrix"	 			: "int8_t **",
-					"uint16-item" 				: "uint16_t",
-					"uint16"	 				: "uint16_t",
-					"uint16-array"	 			: "uint16_t *",
-					"uint16-matrix" 			: "uint16_t **",
-					"int16-item" 				: "int16_t",
-					"int16" 					: "int16_t",
-					"int16-array" 				: "int16_t *",
-					"int16-matrix" 				: "int16_t **",
-					"uint32-item"	 			: "uint32_t",
-					"uint32"	 				: "uint32_t",
-					"uint32-array"	 			: "uint32_t *",
-					"uint32-matrix" 			: "uint32_t **",
-					"int32-item"	 			: "int32_t",
-					"int32"		 				: "int32_t",
-					"int32-array"	 			: "int32_t *",
-					"int32-matrix"	 			: "int32_t **",
-					"uint64"	 				: "uint64_t",
-					"uint64-array"	 			: "uint64_t *",
-					"uint64-matrix" 			: "uint64_t **",
-					"int64-item"	 			: "int64_t",
-					"int64"		 				: "int64_t",
-					"int64-array"	 			: "int64_t *",
-					"int64-matrix"	 			: "int64_t **",
-					"phandle"					: "void *",
-					"phandle-array"				: "void *",
-					"object"					: "object"}
+dtschema_types = {	"flag"				: "bool",
+			"boolean"			: "bool",
+			"cell"				: "uint32_t",
+			"string"			: "char *",
+			"non-unique-string-array" 	: "char **",
+			"string-array"			: "char **",
+			"uint8-item"			: "uint8_t",
+			"uint8" 			: "uint8_t",
+			"uint8-array" 			: "uint8_t *",
+			"uint8-matrix"			: "uint8_t **",
+			"int8-item" 			: "int8_t",
+			"int8"				: "int8_t",
+			"int8-array"			: "int8_t *",
+			"int8-matrix"			: "int8_t **",
+			"uint16-item" 			: "uint16_t",
+			"uint16"			: "uint16_t",
+			"uint16-array"			: "uint16_t *",
+			"uint16-matrix" 		: "uint16_t **",
+			"int16-item" 			: "int16_t",
+			"int16" 			: "int16_t",
+			"int16-array" 			: "int16_t *",
+			"int16-matrix" 			: "int16_t **",
+			"uint32-item"			: "uint32_t",
+			"uint32"			: "uint32_t",
+			"uint32-array"			: "uint32_t *",
+			"uint32-matrix" 		: "uint32_t **",
+			"int32-item"			: "int32_t",
+			"int32"				: "int32_t",
+			"int32-array"			: "int32_t *",
+			"int32-matrix"			: "int32_t **",
+			"uint64"			: "uint64_t",
+			"uint64-array"			: "uint64_t *",
+			"uint64-matrix" 		: "uint64_t **",
+			"int64-item"			: "int64_t",
+			"int64"				: "int64_t",
+			"int64-array"			: "int64_t *",
+			"int64-matrix"			: "int64_t **",
+			"phandle"			: "void *",
+			"phandle-array"			: "void *",
+			"object"			: "object"}
 
 ##
 #	@class		SDTBindings
@@ -93,20 +93,20 @@ class SDTBindings:
 		##
 		#	@var		_path
 		#	@brief		Internal reference to rootdir of bindings
-		self._path 			= path
+		self._path 		= path
 		##
 		#	@var		_verbose
 		#	@brief		Internal reference for printing debug level (0 to 3)
 		self._verbose 		= verbose
 		##
-		#	@varDuplicated		_files_dict
+		#	@varDuplicated	_files_dict
 		#	@brief		Internal dict where key are filename without extension (e.g. serial)\n
-		#				value are complet path to these file
-		self._files_dict 	 = {}
+		#			value are complet path to these file
+		self._files_dict 	= dict()
 		##
 		#	@var		_compat_dict
 		#	@brief		Internal reference similar to #_files_dict but keys are 'compatible'
-		self._compat_dict	= {}
+		self._compat_dict	= dict()
 
 		for dirpath, _, filenames in os.walk(path):
 			if dirpath != path:
@@ -148,11 +148,11 @@ class SDTBindings:
 			print("[INFO]: Compatible dict initialized !")
 
 	##
-	#	@fn			_compat_extractor(self, key, compat)
+	#	@fn		_compat_extractor(self, key, compat)
 	#	@brief		Extract compatible node from properties and
-	#				init a dict like #_files_dict to access path through compatible
+	#			init a dict like #_files_dict to access path through compatible
 	#	@todo		Process compatible with "pattern"\n
-	#				Process "snps,dwmac"
+	#			Process "snps,dwmac"
 	def _compat_extractor(self, key, compat):
 		# TODO: ???
 		if key == 'snps,dwmac':
@@ -183,7 +183,7 @@ class SDTBindings:
 				for item in compat:
 					self._compat_extractor(key, item)
 	##
-	#	@fn			get_binding(self, compatible)
+	#	@fn		get_binding(self, compatible)
 	#	@brief		Init the Binding class corresponding to compatible param
 	#	@param		compatible	The compatible you want the binding for
 	def get_binding(self, compatible):
@@ -193,9 +193,9 @@ class SDTBindings:
 			return None
 
 	##
-	#	@fn			_duplicate_checker(self, item, key)
+	#	@fn		_duplicate_checker(self, item, key)
 	#	@brief		Used by _compat_extractor() in order to check if compatible
-	#				have duplicate
+	#			have duplicate
 	def _duplicate_checker(self, item, key):
 		try:
 			# Check if already exist in the list and if path are diff
@@ -258,60 +258,60 @@ class Binding:
 	def __init__(self, path, files_dict,verbose):
 		##
 		#	@var	_verbose
-		#	Internal reference for printing debug level (0 to 3)
+		#		Internal reference for printing debug level (0 to 3)
 		self._verbose 	= verbose
 		##
 		#	@var	_path
-		#	Internal reference for path of the main file
-		self._path 		= path.rsplit('/',1)[0]
+		#		Internal reference for path of the main file
+		self._path	= path.rsplit('/',1)[0]
 		##
 		#	@var	_files_dict
-		#	Internal reference on all YAML path in root dir. Given by SDTBindings
+		#		Internal reference on all YAML path in root dir. Given by SDTBindings
 		self._files_dict = files_dict
 		##
 		#	@var	_content
-		#	Internal pointer on loaded yaml
+		#		Internal pointer on loaded yaml
 		self._content	= None
 		##
 		#	@var	_file
-		#	Internal file pointer
-		self._file		 = None
+		#		Internal file pointer
+		self._file	 = None
 		##
 		#	@var	_refs
-		#	Internal reference on Binding included by $ref in allOf node
-		self._refs 		= []
+		#		Internal reference on Binding included by $ref in allOf node
+		self._refs 	= list()
 		##
 		#	@var	_if
-		#	Internal reference on if node from allOf node (currently unused)
-		self._if 		= []
+		#		Internal reference on if node from allOf node (currently unused)
+		self._if 	= list()
 		##
 		#	@var	_props
-		#	Internal reference on BindingProps containing properties information
+		#		Internal reference on BindingProps containing properties information
 		self._props 	= BindingProps(verbose)
 		##
 		#	@var	file_name
-		#	The YAML file name represented by this class
-		self.file_name	 	 = path.rsplit('/',1)[1]
+		#		The YAML file name represented by this class
+		self.file_name	= path.rsplit('/',1)[1]
 		##
 		#	@var	id
-		#	Usually kernel.org link to this binding
-		self.id				= ""
+		#		Usually kernel.org link to this binding
+		self.id		= str()
 		##
 		#	@var	schema
-		#	dt-schema used as base for this binding
-		self.schema			= ""
+		#		dt-schema used as base for this binding
+		self.schema	= str()
 		##
 		#	@var	maintainers
-		#	Maintainers of this bindings
-		self.maintainers	= ""
+		#		Maintainers of this bindings
+		self.maintainers= str()
 		##
 		#	@var	title
-		#	Title of this bindings
-		self.title			= ""
+		#		Title of this bindings
+		self.title	= str()
 		##
 		#	@var	examples
-		#	If maintainers did some, you can find dts node examples here
-		self.examples		= ""
+		#		If maintainers did some, you can find dts node examples here
+		self.examples	= str()
 
 		global dtschema
 
@@ -341,7 +341,7 @@ class Binding:
 				print("[INFO]: No examples found for ", self.file_name)
 
 	##
-	#	@fn			_init_allOf(self)
+	#	@fn		_init_allOf(self)
 	#	@brief		Init #_refs
 	def _init_allOf(self):
 		try:
@@ -353,7 +353,7 @@ class Binding:
 
 		for item in self._content['allOf']:
 			if '$ref' in item:
-				path = ""
+				path = str()
 				# If ref pointing on a dt-schema, path used is defined
 				# at top of this script and point on path where pip3
 				# installed dt-schema
@@ -372,7 +372,7 @@ class Binding:
 					# with the above statement, other generally are
 					# stored in other dir
 					# e.g. root_dir/dir_a/subdir_a/myfile.yaml
-					#	_______________________________|
+					#   _______________________________|
 					#  |-> root_dir/dir_b/common.yaml
 					if "/common.yaml" in item['$ref']:
 						path = self._path
@@ -404,10 +404,10 @@ class Binding:
 				self._if.append(item)
 
 	##
-	#	@fn			_init_Properties(self)
+	#	@fn		_init_Properties(self)
 	#	@brief		Init #_props which is basically a BindingProps item
 	#	@details	Exctract required list from #_content and call
-	#				BindingProps.add_required() function
+	#			BindingProps.add_required() function
 	def _init_Properties(self):
 		# Extract required node
 		if self._verbose > 2:
@@ -415,11 +415,13 @@ class Binding:
 
 		try:
 			required = self._content['required']
+
 		except KeyError:
 			if self._verbose > 1:
 				print("[WARN]: No node 'required' found for ", self.file_name)
 			required = False
 		self._props.add_required(required)
+
 		# Exctract properties node
 		try:
 			properties = self._content['properties']
@@ -428,6 +430,7 @@ class Binding:
 				print("[WARN]: No node 'properties' found for ", self.file_name)
 			properties = False
 		self._props.add_properties(properties)
+
 		# Add ref properties
 		for binding in self._refs:
 			self._props.add_from_BindingProp(binding._props)
@@ -436,7 +439,7 @@ class Binding:
 			print("[INFO]: Properties initialized for ", self.file_name)
 
 	##
-	#	@fn			get_prop_by_name(self, name)
+	#	@fn		get_prop_by_name(self, name)
 	#	@brief		The clean way to retrieve a property from BindingProps
 	#	@param		name	Name of the desired props
 	#	@return		A Prop item or None
@@ -444,14 +447,14 @@ class Binding:
 		return self._props.prop_from_name(name)
 
 	##
-	#	@fn			required(self)
+	#	@fn		required(self)
 	#	@brief		The clean way to retrieve BindingProps._required
 	#	@return		BindingProps._required
 	def required(self):
 		return self._props._required
 
 	##
-	#	@fn			optional(self)
+	#	@fn		optional(self)
 	#	@brief		The clean way to retrieve BindingProps._optional
 	#	@return		BindingProps._optional
 	def optional(self):
@@ -461,7 +464,7 @@ class Binding:
 #	@class 		Prop
 #	@brief		This NamedTuple represent a single property and its value(s)
 #	@details	As NamedTuple var can't be detected by doxygen, here it's how it work:\n
-#				Prop is like a C struct, with 2 field:\n
+#			Prop is like a C struct, with 2 field:\n
 #				* Prop.name 	-> The name of the property\n
 #				* Prop.value 	-> Value(s) of the property
 class Prop(NamedTuple):
@@ -472,8 +475,8 @@ class Prop(NamedTuple):
 #	@class 		MainProp
 #	@brief		This NamedTuple represent a single property and its value(s)
 #	@details	This class is like Prop but should be at top level (as Prop.value could be another Prop)\n
-#				As NamedTuple var can't be detected by doxygen, here it's how it work:\n
-#				MainProp is like a C struct, with 3 field:\n
+#			As NamedTuple var can't be detected by doxygen, here it's how it work:\n
+#			MainProp is like a C struct, with 3 field:\n
 #				* MainProp.name 	-> The name of the property\n
 #				* MainProp.value 	-> Value(s) of the property\n
 #				* MainProp.type		-> Type of the property
@@ -493,9 +496,9 @@ class MainProp(NamedTuple):
 		return self._getitem_finder(key, self.value)
 
 	##
-	#	@fn			_contains_finder
+	#	@fn		_contains_finder(self, name, val)
 	#	@brief		Recursive private method used by magic method `__contains__()`
-	#				to find if given item is in.
+	#			to find if given item is in.
 	def _contains_finder(self, name, val):
 		if isinstance(val, Prop):
 			if val.name == name:
@@ -512,7 +515,7 @@ class MainProp(NamedTuple):
 		return False
 
 	##
-	#	@fn			_getitem_finder
+	#	@fn		_getitem_finder(self, name, val)
 	#	@brief		Recursive private method used by magic method `__getitem__()`
 	#				to return Prop if given Prop.name exist.
 	def _getitem_finder(self, name, val):
@@ -534,29 +537,29 @@ class MainProp(NamedTuple):
 ##
 #	@class		BindingProps
 #	@brief		This class represent the binding properties of a Binding class
-#	@todo		Different algorithme cloud be rework as they could be more
-#				clean and efficient since we had __contains__ and __getitem__ to MainProp
+#	@todo		Different algorithm could be rework as they could be more
+#			clean and efficient since we had __contains__ and __getitem__ to MainProp
 class BindingProps:
 	def __init__(self, verbose):
 		##
 		#	@var	_props
-		#	A dict Contains properties formatted with Prop
-		self._props = {}
+		#		A dict Contains properties formatted with Prop
+		self._props	= dict()
 		##
 		#	@var	_required
-		#	A list of all required properties
-		self._required = []
+		#		A list of all required properties
+		self._required 	= list()
 		##
 		#	@var	_optional
-		#	A list of all optional properties
-		self._optional = []
+		#		A list of all optional properties
+		self._optional 	= list()
 		##
 		#	@var	_verbose
-		#	Internal reference for printing debug level (0 to 3)
+		#		Internal reference for printing debug level (0 to 3)
 		self._verbose 	= verbose
 
 	##
-	#	@fn			add_required(self, required)
+	#	@fn		add_required(self, required)
 	#	@brief		Init or update #_required
 	#	@param		required	A list usually extracted from \link Binding._content \endlink
 	def add_required(self, required):
@@ -570,17 +573,19 @@ class BindingProps:
 		self._update()
 
 	##
-	#	@fn			add_properties(self, properties)
+	#	@fn		add_properties(self, properties)
 	#	@brief		Init or update #_optional and _props
 	#	@param		properties	A dict usually extracted from \link Binding._content \endlink
 	def add_properties(self, properties):
 		if not properties:
 			return
+
 		# Init or update optional list from properties
 		for key in properties:
 			self._optional.append(key)
 		self._optional.sort()
 		self._update()
+
 		# Init or update props list from properties
 		for key,item in properties.items():
 			value = self._value_analyzer(item)
@@ -588,9 +593,9 @@ class BindingProps:
 			self._props.update({key : MainProp(key,value,type_t)})
 
 	##
-	#	@fn			add_from_BindingProp(self, prop)
+	#	@fn		add_from_BindingProp(self, prop)
 	#	@brief		This function meant to be called to add properties of a
-	#				$ref binding to the main Binding
+	#			$ref binding to the main Binding
 	def add_from_BindingProp(self, prop):
 		self._required += prop._required
 		# Remove duplicates
@@ -607,7 +612,7 @@ class BindingProps:
 		self._update()
 
 	##
-	#	@fn			prop_from_name(self, name)
+	#	@fn		prop_from_name(self, name)
 	#	@brief		Explicit : return a Prop for a given name
 	#	@param		name	Name of the desired Prop
 	#	@return		A Prop item or None
@@ -627,21 +632,21 @@ class BindingProps:
 		return None
 
 	##
-	#	@fn			_update(self)
+	#	@fn		_update(self)
 	#	@brief		Did some cleaning on #_optional list after update
 	#	@details	After adding new elements to #_optional, check if these
-	#				elements can be found in #_required, and so, remove them
-	#				from #_optional
+	#			elements can be found in #_required, and so, remove them
+	#			from #_optional
 	def _update(self):
 		if self._required:
 			self._optional = [item for item in self._optional if item not in self._required]
 
 	##
-	#	@fn			_value_analyzer(self, item)
+	#	@fn		_value_analyzer(self, item)
 	#	@brief		Analyze value type of input and process it
 	#	@details	It should be called for extract necessary info for #_props
-	#				It ceate some Prop or list of Prop or simply return a var
-	#				that should be added to the main Prop value
+	#			It ceate some Prop or list of Prop or simply return a var
+	#			that should be added to the main Prop value
 	def _value_analyzer(self, item):
 		if type(item) == dict:
 			# Only one item so don't need to create a list of item
@@ -656,7 +661,7 @@ class BindingProps:
 
 			# More than one item so we will return a list of item
 			else:
-				tmp = []
+				tmp = list()
 				for key, value in item.items():
 					if type(value) in (dict,list):
 						#Recurs so we have a list of Prop() in value and not a dict
@@ -667,7 +672,7 @@ class BindingProps:
 				return tmp
 
 		elif type(item) == list:
-			tmp = []
+			tmp = list()
 			for value in item:
 				if type(value) in (dict,list) :
 					#Recurs so we have a list of Prop() in value and not a dict
@@ -682,7 +687,7 @@ class BindingProps:
 			return item
 
 	##
-	#	@fn			_get_type(self, key, item)
+	#	@fn		_get_type(self, key, item)
 	#	@brief		Called by add_properties() to retrieve MainProp type
 	#	@todo		All case not or partially process (see TODO:):
 	#				- Item dict with '$ref' that is not schema and no 'type'\n
@@ -750,13 +755,13 @@ class BindingProps:
 			return "unknown"
 
 ##
-#	@fn			_init_dtschema_list()
+#	@fn		_init_dtschema_list()
 #	@brief		Init a list of type from dtschemas
 #	@details	This fct is called by SDTBindings __init__()
-#				It will load every YAML in dtschema python lib and update
-#				#nodes_types dict with the ones given by dtschemas
+#			It will load every YAML in dtschema python lib and update
+#			#nodes_types dict with the ones given by dtschemas
 def _init_dtschema_list():
-	files_dict = {}
+	files_dict = dict()
 
 	for dirpath, _, filenames in os.walk(dtschema):
 		if dirpath != dtschema and not "meta-schemas" in dirpath:
@@ -764,7 +769,7 @@ def _init_dtschema_list():
 				if ".yaml" in file:
 					files_dict.update({file.split('.')[0] : dirpath + "/" + file})
 
-	types_dict = {}
+	types_dict = dict()
 
 	for _, path in files_dict.items():
 		if 'graph.yaml' in path:
@@ -794,7 +799,7 @@ def _init_dtschema_list():
 								sys.exit(-1)
 						types_dict.update({key : dtschema_types[type_t]})
 					elif 'anyOf' in value.keys():
-						list_t = []
+						list_t = list()
 						for item in value['anyOf']:
 							if '$ref' in item.keys():
 								list_t.append(dtschema_types[item['$ref'].rsplit('/',1)[1]])
@@ -805,7 +810,7 @@ def _init_dtschema_list():
 						else:
 							types_dict.update({key : tuple(list_t)})
 					elif 'oneOf' in value.keys():
-						list_t = []
+						list_t = list()
 						for item in value['oneOf']:
 							if '$ref' in item.keys():
 								list_t.append(item['$ref'].rsplit('/',1)[1])

@@ -23,21 +23,23 @@ for the JavaScript code in this file
 var NAVTREE =
 [
   [ "py-dtbindings", "index.html", [
-    [ "Brief", "index.html#autotoc_md3", null ],
-    [ "Documentation", "index.html#autotoc_md4", null ],
-    [ "TODO", "index.html#autotoc_md5", null ],
-    [ "Class", "index.html#autotoc_md6", [
-      [ "SDTBindings", "index.html#autotoc_md7", null ],
-      [ "Binding", "index.html#autotoc_md8", null ],
-      [ "BindingProps", "index.html#autotoc_md9", null ]
+    [ "py-dtbindings", "index.html#autotoc_md2", [
+      [ "Brief", "index.html#autotoc_md3", null ],
+      [ "Documentation", "index.html#autotoc_md4", null ],
+      [ "TODO", "index.html#autotoc_md5", null ],
+      [ "Class", "index.html#autotoc_md6", [
+        [ "SDTBindings", "index.html#autotoc_md7", null ],
+        [ "Binding", "index.html#autotoc_md8", null ],
+        [ "BindingProps", "index.html#autotoc_md9", null ]
+      ] ],
+      [ "Usage", "index.html#autotoc_md10", [
+        [ "Linux", "index.html#autotoc_md11", null ]
+      ] ],
+      [ "Devicetree files", "index.html#autotoc_md12", null ],
+      [ "Contribute", "index.html#autotoc_md13", null ],
+      [ "Third Party", "index.html#autotoc_md14", null ],
+      [ "Contact", "index.html#autotoc_md15", null ]
     ] ],
-    [ "Usage", "index.html#autotoc_md10", [
-      [ "Linux:", "index.html#autotoc_md11", null ]
-    ] ],
-    [ "Devicetree files", "index.html#autotoc_md12", null ],
-    [ "Contribute", "index.html#autotoc_md13", null ],
-    [ "Third Party", "index.html#autotoc_md14", null ],
-    [ "Contact", "index.html#autotoc_md15", null ],
     [ "License", "md__l_i_c_e_n_s_e.html", [
       [ "MIT License", "md__l_i_c_e_n_s_e.html#autotoc_md1", null ]
     ] ],
