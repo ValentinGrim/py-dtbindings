@@ -609,6 +609,10 @@ class BindingProps:
 		if 'compatible' in prop._props.keys():
 			del prop._props['compatible']
 
+		for k,v in prop._props.items():
+			if not k in self._props.keys():
+				self._props.update({k : v})
+
 		self._update()
 
 	##
@@ -813,9 +817,9 @@ def _init_dtschema_list():
 						list_t = list()
 						for item in value['oneOf']:
 							if '$ref' in item.keys():
-								list_t.append(item['$ref'].rsplit('/',1)[1])
+								list_t.append(dtschema_types[item['$ref'].rsplit('/',1)[1]])
 							elif 'type' in item.keys():
-								list_t.append(item['type'])
+								list_t.append(dtschema_types[item['type']])
 						if len(list_t) == 1:
 							types_dict.update({key : list_t[0]})
 						else:
@@ -823,4 +827,5 @@ def _init_dtschema_list():
 					else:
 						pass
 						#print(value)
+
 		nodes_types.update(types_dict)
