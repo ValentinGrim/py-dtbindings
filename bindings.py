@@ -523,11 +523,11 @@ class MainProp(NamedTuple):
 			if val.name == name:
 				return val
 			else:
-				return self._contains_finder(name, val.value)
+				return self._getitem_finder(name, val.value)
 
 		elif type(val) == list:
 			for item in val:
-				prop_t = self._contains_finder(name, item)
+				prop_t = self._getitem_finder(name, item)
 				if prop_t:
 					return prop_t
 			return None
