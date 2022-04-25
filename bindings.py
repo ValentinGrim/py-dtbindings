@@ -792,6 +792,7 @@ def _init_dtschema_list():
 				if key in nodes_types.keys():
 					continue
 				if isinstance(value,dict):
+					name = [name for name in ('anyOf','oneOf') if name in value.keys()]
 					if '$ref' in value.keys():
 						try:
 							type_t = value["$ref"].rsplit('/',1)[1]
@@ -802,20 +803,9 @@ def _init_dtschema_list():
 								print(value)
 								sys.exit(-1)
 						types_dict.update({key : dtschema_types[type_t]})
-					elif 'anyOf' in value.keys():
+					elif name:
 						list_t = list()
-						for item in value['anyOf']:
-							if '$ref' in item.keys():
-								list_t.append(dtschema_types[item['$ref'].rsplit('/',1)[1]])
-							elif 'type' in item.keys():
-								list_t.append(dtschema_types[item['type']])
-						if len(list_t) == 1:
-							types_dict.update({key : list_t[0]})
-						else:
-							types_dict.update({key : tuple(list_t)})
-					elif 'oneOf' in value.keys():
-						list_t = list()
-						for item in value['oneOf']:
+						for item in value[name[0]]:
 							if '$ref' in item.keys():
 								list_t.append(dtschema_types[item['$ref'].rsplit('/',1)[1]])
 							elif 'type' in item.keys():
