@@ -2,7 +2,7 @@
 #	@file		bindings.py
 #	@author		Valentin Monnot
 #	@copyright 	SPDX-License-Identifier: MIT
-#	@version	v1.1
+#	@version	v1.2.1
 #	@date 		2022
 
 import os, sys
@@ -23,8 +23,7 @@ dtschema = os.path.expanduser("~/.local/lib/python3.8/site-packages/dtschema")
 #	@var		nodes_types
 #	@brief		This dict is used to store node type information for
 #			"standard" and static properties
-nodes_types = {'clocks' 	:	[('void *'	, 'clock'	),
-				 	('uint32_t'	, 'clock_id'	)]}
+nodes_types = dict()
 
 ##
 #	@var 		dtschema_types
@@ -71,7 +70,7 @@ dtschema_types = {	"flag"				: "bool",
 			"int64-matrix"			: "int64_t **",
 			"phandle"			: "void *",
 			"phandle-array"			: "void *",
-			"object"			: "object"}
+			"object"			: "void *"}
 
 ##
 #	@class		SDTBindings
@@ -813,7 +812,11 @@ def _init_dtschema_list():
 						if len(list_t) == 1:
 							types_dict.update({key : list_t[0]})
 						else:
-							types_dict.update({key : tuple(list_t)})
+							# e.g. (object, phandle) return (void *, void *)
+							if list_t[0] == list_t[1]:
+								types_dict.update({key : list_t[0]})
+							else:
+								types_dict.update({key : tuple(list_t)})
 					else:
 						pass
 						#print(value)
