@@ -14,10 +14,7 @@ from typing import NamedTuple, Any
 ##
 #	@var		dtschema
 #	@brief		Path to dtschema python library in order to access schemas
-#	@details	This path may need to be more dynamic one day,but as
-#			most user will have the same path (on linux platform)
-#			that's static for now. And you always can modify it as you want
-dtschema = os.path.expanduser("~/.local/lib/python3.8/site-packages/dtschema")
+dtschema = os.path.dirname(__file__) + "/download/dtschema"
 
 ##
 #	@var		nodes_types
@@ -88,7 +85,7 @@ dtschema_types = {	"flag"				: "bool",
 #		print(myBinding.required())
 #	~~~~~~~~~~~~~~~~~~~~~
 class SDTBindings:
-	def __init__(self,path,verbose,test = False):
+	def __init__(self,path = "./download/bindings", verbose = 0,test = False):
 		##
 		#	@var		_path
 		#	@brief		Internal reference to rootdir of bindings
@@ -107,8 +104,36 @@ class SDTBindings:
 		#	@brief		Internal reference similar to #_files_dict but keys are 'compatible'
 		self._compat_dict	= dict()
 
-		for dirpath, _, filenames in os.walk(path):
-			if dirpath != path:
+		# Download kernel.org dtbindings
+		if not os.path.exists(self._path):
+			print("No local bindings found, downloading them from kernel.org")
+			print("This may take up to 5 minutes...")
+			if self._verbose:
+				os.system("wget -r -A *.yaml --no-parent --cut-dirs=3 -nH -P download https://www.kernel.org/doc/Documentation/devicetree/bindings/")
+			else:
+				os.system("wget -r -A *.yaml --no-parent --cut-dirs=3 -nH -P download -q https://www.kernel.org/doc/Documentation/devicetree/bindings/")
+			print("Bindings download done !")
+			print("Cleaning bindings...")
+			os.system("./clean_bindings.sh > init.log")
+			print("Cleaning done !")
+
+		# Download devicetree.org dtschema
+		if not os.path.exists(dtschema):
+			print("No local dtschema found, downloading them from github.com/devicetree-org/dt-schema")
+			print("This may take up to a minute...")
+
+			os.system("wget -P download/tmp -q https://github.com/devicetree-org/dt-schema/archive/refs/heads/main.zip")
+			os.system("unzip download/tmp/main.zip -d download/tmp/ > download.log")
+			os.system("cp -r download/tmp/dt-schema-main/dtschema/ download >> download.log")
+			os.system("rm -r download/tmp >> download.log")
+			os.system("rm download/dtschema/*.py >> download.log")
+			os.system("rm download/dtschema/.gitignore >> download.log")
+
+			print("Dt-schema download done !")
+
+
+		for dirpath, _, filenames in os.walk(self._path):
+			if dirpath != self._path:
 				for file in filenames:
 					if ".yaml" in file:
 						self._files_dict.update({file.split('.')[0] : dirpath + "/" + file})
@@ -396,7 +421,7 @@ class Binding:
 
 				if path:
 					if self._verbose > 2:
-						print("[INFO]: Binding <%s> loading $ref <%s>" % (self.file_name, path))
+						print("[INFO]: Binding <%s> loading $ref <%s>" % (self._path + "/" + self.file_name, path))
 					self._refs.append(Binding(path,self._files_dict,self._verbose))
 
 			if 'if' in item:

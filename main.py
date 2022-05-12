@@ -3,5 +3,5 @@
 from bindings import SDTBindings
 
 if __name__ == "__main__":
-	path = "./devicetree/bindings"
-	SDTBindings(path,0)
+	mySDTBindings = SDTBindings()
+	myBinding = mySDTBindings.get_binding("")
