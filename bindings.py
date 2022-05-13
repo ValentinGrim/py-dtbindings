@@ -114,7 +114,10 @@ class SDTBindings:
 				os.system("wget -r -A *.yaml --no-parent --cut-dirs=3 -nH -P download -q https://www.kernel.org/doc/Documentation/devicetree/bindings/")
 			print("Bindings download done !")
 			print("Cleaning bindings...")
-			os.system("./clean_bindings.sh > init.log")
+			res = os.system("./clean_bindings.sh > init.log")
+			if res == 32512:
+				# We're a submodule
+				os.system("./py-dtbindings/clean_bindings.sh > init.log")
 			print("Cleaning done !")
 
 		# Download devicetree.org dtschema
