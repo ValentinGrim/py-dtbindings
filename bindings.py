@@ -14,7 +14,7 @@ from typing import NamedTuple, Any
 ##
 #	@var		dtschema
 #	@brief		Path to dtschema python library in order to access schemas
-dtschema = os.path.dirname(__file__) + "/download/dtschema"
+dtschema = "./download/dtschema"
 
 ##
 #	@var		nodes_types
