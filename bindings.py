@@ -117,6 +117,8 @@ class SDTBindings:
 			res = os.system("./clean_bindings.sh > init.log")
 			if res == 32512:
 				# We're a submodule
+				print("Error 'sh: 1: ./clean_bindings.sh: not found' issued")
+				print("if py-dtbindings is used as a submodules please ignore this error")
 				os.system("./py-dtbindings/clean_bindings.sh > init.log")
 			print("Cleaning done !")
 
