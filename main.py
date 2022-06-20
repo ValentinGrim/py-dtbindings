@@ -3,5 +3,5 @@
 from bindings import SDTBindings
 
 if __name__ == "__main__":
-	mySDTBindings = SDTBindings()
+	mySDTBindings = SDTBindings(verbose = 0)
 	myBinding = mySDTBindings.get_binding("")

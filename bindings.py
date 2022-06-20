@@ -113,14 +113,6 @@ class SDTBindings:
 			else:
 				os.system("wget -r -A *.yaml --no-parent --cut-dirs=3 -nH -P download -q https://www.kernel.org/doc/Documentation/devicetree/bindings/")
 			print("Bindings download done !")
-			print("Cleaning bindings...")
-			res = os.system("./clean_bindings.sh > init.log")
-			if res == 32512:
-				# We're a submodule
-				print("Error 'sh: 1: ./clean_bindings.sh: not found' issued")
-				print("if py-dtbindings is used as a submodules please ignore this error")
-				os.system("./py-dtbindings/clean_bindings.sh > init.log")
-			print("Cleaning done !")
 
 		# Download devicetree.org dtschema
 		if not os.path.exists(dtschema):
@@ -143,7 +135,7 @@ class SDTBindings:
 					if ".yaml" in file:
 						self._files_dict.update({file.split('.')[0] : dirpath + "/" + file})
 
-		_init_dtschema_list()
+		_init_dtschema_list(verbose)
 
 		# Init compatible dict
 
@@ -347,9 +339,11 @@ class Binding:
 		try:
 			self._file = open(path, 'r')
 		except OSError:
-			print('[ERR ]: Cannot open', path)
-			print("[INFO]: If you didn't called this file, check that $ref is correctly set")
-			sys.exit(-1)
+			if verbose:
+				print("[ERR ]: Cannot open", path)
+				print("	A $ref property might have a wrong path")
+				print("	For more information, please use debug lvl 3")
+			return None
 
 		self._content = yaml.safe_load(self._file)
 
@@ -440,14 +434,13 @@ class Binding:
 	def _init_Properties(self):
 		# Extract required node
 		if self._verbose > 2:
-			print("[INFO]: Initializing properties for ", self.file_name)
+			print("[INFO]: Initializing properties for", self.file_name)
 
 		try:
 			required = self._content['required']
-
 		except KeyError:
 			if self._verbose > 1:
-				print("[WARN]: No node 'required' found for ", self.file_name)
+				print("[WARN]: No node 'required' found for", self.file_name)
 			required = False
 		self._props.add_required(required)
 
@@ -456,9 +449,16 @@ class Binding:
 			properties = self._content['properties']
 		except KeyError:
 			if self._verbose:
-				print("[WARN]: No node 'properties' found for ", self.file_name)
+				print("[WARN]: No node 'properties' found for", self.file_name)
 			properties = False
 		self._props.add_properties(properties)
+
+		try:
+			patternProp = self._content['patternProperties']
+		except KeyError:
+			if self._verbose > 1:
+				print("[WARN]: No node 'patternProperties' found for", self.file_name)
+			patternProp = False
 
 		# Add ref properties
 		for binding in self._refs:
@@ -793,7 +793,7 @@ class BindingProps:
 #	@details	This fct is called by SDTBindings __init__()
 #			It will load every YAML in dtschema python lib and update
 #			#nodes_types dict with the ones given by dtschemas
-def _init_dtschema_list():
+def _init_dtschema_list(verbose):
 	files_dict = dict()
 
 	for dirpath, _, filenames in os.walk(dtschema):
@@ -810,8 +810,11 @@ def _init_dtschema_list():
 		try:
 			file_t = open(path,'r')
 		except OSError:
-			print("[ERR ]: Cannot open", path)
-			sys.exit(-1)
+			if verbose:
+				print("[ERR ]:  Cannot open", path)
+				print("	A $ref property might have a wrong path")
+				print("	For more information, please use debug lvl 3")
+			continue
 
 		yaml_t = yaml.safe_load(file_t)
 
