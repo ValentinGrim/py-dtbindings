@@ -453,12 +453,14 @@ class Binding:
 			properties = False
 		self._props.add_properties(properties)
 
+		# Extract patternProp node
 		try:
 			patternProp = self._content['patternProperties']
 		except KeyError:
 			if self._verbose > 1:
 				print("[WARN]: No node 'patternProperties' found for", self.file_name)
 			patternProp = False
+		self._props.add_properties(patternProp)
 
 		# Add ref properties
 		for binding in self._refs:
@@ -651,15 +653,18 @@ class BindingProps:
 	#	@return		A Prop item or None
 	def prop_from_name(self, name):
 		try:
-			return self._props[name]
+			return self._props[name.split('@')[0]]
 		except KeyError:
 			# Check if there is any pattern in nodes matching the name
 			for key,value in self._props.items():
-				if type(value.value) == list:
+				if re.match(key, name):
+					return self._props[key]
+
+				elif type(value.value) == list:
 					for prop in value.value:
 						if isinstance(prop, Prop):
 							if prop.name == 'pattern':
-								if re.match(prop.value, name):
+								if re.match(prop.value, name.split('@')[0]):
 									return self._props[key]
 		# Else return nothing
 		return None
@@ -759,7 +764,7 @@ class BindingProps:
 					elif type_t == "boolean":
 						return "bool"
 					else:
-						# for what i know, there is no f***in way we fall here
+						# for what i know, there is no way we fall here
 						print("[WARN]: Unconventional type %s for %s" % (type,key))
 						return "unknown"
 				else:
