@@ -502,6 +502,20 @@ class Prop(NamedTuple):
 	name: str
 	value: Any
 
+	def __str__(self):
+		ret = "__Prop__\n"
+		ret = ret + "Name: %s\nValue(s):\n" % self.name
+
+		if isinstance(self.value,list):
+			for item in self.value:
+				if type(item) in (str,int):
+					ret = ret + str(item) + "\n"
+				else:
+					ret = ret + str(item)
+		else:
+			ret = ret + str(self.value) + "\n"
+		return ret
+
 ##
 #	@class 		MainProp
 #	@brief		This NamedTuple represent a single property and its value(s)
@@ -515,6 +529,13 @@ class MainProp(NamedTuple):
 	name: str
 	value: Any
 	type: Any
+
+	def __str__(self):
+		ret = "____MainProp____\n"
+		ret = ret + "Name: %s\nType: %s\nValue(s):\n\n" %(self.name, self.type)
+		for item in self.value:
+			ret = ret + str(item)
+		return ret
 
 	def __contains__(self, item):
 		if not isinstance(item, str):
@@ -534,6 +555,8 @@ class MainProp(NamedTuple):
 		if isinstance(val, Prop):
 			if val.name == name:
 				return True
+			elif re.search(val.name, name):
+				return True
 			else:
 				return self._contains_finder(name, val.value)
 
@@ -552,6 +575,8 @@ class MainProp(NamedTuple):
 	def _getitem_finder(self, name, val):
 		if isinstance(val, Prop):
 			if val.name == name:
+				return val
+			elif re.search(val.name, name):
 				return val
 			else:
 				return self._getitem_finder(name, val.value)
@@ -657,14 +682,14 @@ class BindingProps:
 		except KeyError:
 			# Check if there is any pattern in nodes matching the name
 			for key,value in self._props.items():
-				if re.match(key, name):
+				if re.search(key, name):
 					return self._props[key]
 
 				elif type(value.value) == list:
 					for prop in value.value:
 						if isinstance(prop, Prop):
 							if prop.name == 'pattern':
-								if re.match(prop.value, name.split('@')[0]):
+								if re.search(prop.value, name.split('@')[0]):
 									return self._props[key]
 		# Else return nothing
 		return None
@@ -686,42 +711,49 @@ class BindingProps:
 	#			It ceate some Prop or list of Prop or simply return a var
 	#			that should be added to the main Prop value
 	def _value_analyzer(self, item):
+		ret = list()
+		# It should be only dict or simple values
 		if type(item) == dict:
-			# Only one item so don't need to create a list of item
-			if len(item) == 1:
-				key = list(item.keys())[0]
-				value = list(item.values())[0]
-
-				if type(value) in (dict,list):
-					# Recurs
-					return Prop(key,self._value_analyzer(value))
-				return Prop(key,value)
-
-			# More than one item so we will return a list of item
-			else:
-				tmp = list()
-				for key, value in item.items():
-					if type(value) in (dict,list):
-						#Recurs so we have a list of Prop() in value and not a dict
-						tmp.append(self._value_analyzer(value))
+			for key, value in item.items():
+				# If value type is dict
+				if type(value) == dict:
+					# Temporary list holding the value for the futur prop
+					tmp_val = list()
+					# Recurs on value
+					tmp = self._value_analyzer(value)
+					if isinstance(tmp,list):
+						for val_t in tmp:
+							tmp_val.append(val_t)
 					else:
-						# main Prop.value will be a list of Prop
-						tmp.append(Prop(key,value))
-				return tmp
-
-		elif type(item) == list:
-			tmp = list()
-			for value in item:
-				if type(value) in (dict,list) :
-					#Recurs so we have a list of Prop() in value and not a dict
-					tmp.append(self._value_analyzer(value))
+						tmp_val = tmp
+					# And create a new prop
+					ret.append(Prop(key, tmp_val))
+				#If value type is list
+				elif type(value) == list:
+					# And the first elements is a dict
+					# All value elements should be a dict
+					if type(value[0]) == dict:
+						# Temporary list holding the value for the futur prop
+						tmp_val = list()
+						# Recurs on all values
+						for val in value:
+							tmp = self._value_analyzer(val)
+							if isinstance(tmp,list):
+								for val_t in tmp:
+									tmp_val.append(val_t)
+							else:
+								tmp_val = tmp
+						# And create a new prop
+						ret.append(Prop(key,tmp_val))
+					else:
+						# Simple values, no sub properties
+						ret.append(Prop(key,value))
 				else:
-					# List of literal return it and it will be part of Prop.value
-					tmp.append(value)
-			return tmp
-
+					# Simple values, no sub properties
+					ret.append(Prop(key,value))
+			return ret
 		else:
-			# Return literal, it will be the Prop.value
+			# Simple values, no sub properties
 			return item
 
 	##
