@@ -2,7 +2,7 @@
 #	@file		bindings.py
 #	@author		Valentin Monnot
 #	@copyright 	SPDX-License-Identifier: MIT
-#	@version	v1.4.0
+#	@version	v1.4.1
 #	@date 		2022
 
 import os, sys
