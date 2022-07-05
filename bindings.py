@@ -792,7 +792,7 @@ class BindingProps:
 					# A type has been given by the vendor, nice job !
 					type_t = item['type']
 					if type_t == "object":
-						return "object"
+						return "void *"
 					elif type_t == "boolean":
 						return "bool"
 					else:
