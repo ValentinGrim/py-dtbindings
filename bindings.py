@@ -516,26 +516,11 @@ class Prop(NamedTuple):
 			ret = ret + str(self.value) + "\n"
 		return ret
 
-##
-#	@class 		MainProp
-#	@brief		This NamedTuple represent a single property and its value(s)
-#	@details	This class is like Prop but should be at top level (as Prop.value could be another Prop)\n
-#			As NamedTuple var can't be detected by doxygen, here it's how it work:\n
-#			MainProp is like a C struct, with 3 field:\n
-#				* MainProp.name 	-> The name of the property\n
-#				* MainProp.value 	-> Value(s) of the property\n
-#				* MainProp.type		-> Type of the property
-class MainProp(NamedTuple):
-	name: str
-	value: Any
-	type: Any
-
-	def __str__(self):
-		ret = "____MainProp____\n"
-		ret = ret + "Name: %s\nType: %s\nValue(s):\n\n" %(self.name, self.type)
+	def keys(self):
+		tmp = list()
 		for item in self.value:
-			ret = ret + str(item)
-		return ret
+			tmp.append(item.name)
+		return tmp
 
 	def __contains__(self, item):
 		if not isinstance(item, str):
@@ -589,6 +574,85 @@ class MainProp(NamedTuple):
 			return None
 		return None
 
+
+##
+#	@class 		MainProp
+#	@brief		This NamedTuple represent a single property and its value(s)
+#	@details	This class is like Prop but should be at top level (as Prop.value could be another Prop)\n
+#			As NamedTuple var can't be detected by doxygen, here it's how it work:\n
+#			MainProp is like a C struct, with 3 field:\n
+#				* MainProp.name 	-> The name of the property\n
+#				* MainProp.value 	-> Value(s) of the property\n
+#				* MainProp.type		-> Type of the property
+class MainProp(NamedTuple):
+	name: str
+	value: Any
+	type: Any
+
+	def __str__(self):
+		ret = "____MainProp____\n"
+		ret = ret + "Name: %s\nType: %s\nValue(s):\n\n" %(self.name, self.type)
+		for item in self.value:
+			ret = ret + str(item)
+		return ret
+
+	def keys(self):
+		tmp = list()
+		for item in self.value:
+			tmp.append(item.name)
+		return tmp
+
+	def __contains__(self, item):
+		if not isinstance(item, str):
+			return False
+		return self._contains_finder(item, self.value)
+
+	def __getitem__(self, key):
+		if not isinstance(key, str):
+			return None
+		return self._getitem_finder(key, self.value)
+
+	##
+	#	@fn		_contains_finder(self, name, val)
+	#	@brief		Recursive private method used by magic method `__contains__()`
+	#			to find if given item is in.
+	def _contains_finder(self, name, val):
+		if isinstance(val, Prop):
+			if val.name == name:
+				return True
+			elif re.search(val.name, name):
+				return True
+			else:
+				return self._contains_finder(name, val.value)
+
+		elif type(val) == list:
+			for item in val:
+				bool_t = self._contains_finder(name, item)
+				if bool_t:
+					return True
+			return False
+		return False
+
+	##
+	#	@fn		_getitem_finder(self, name, val)
+	#	@brief		Recursive private method used by magic method `__getitem__()`
+	#				to return Prop if given Prop.name exist.
+	def _getitem_finder(self, name, val):
+		if isinstance(val, Prop):
+			if val.name == name:
+				return val
+			elif re.search(val.name, name):
+				return val
+			else:
+				return self._getitem_finder(name, val.value)
+
+		elif type(val) == list:
+			for item in val:
+				prop_t = self._getitem_finder(name, item)
+				if prop_t:
+					return prop_t
+			return None
+		return None
 
 ##
 #	@class		BindingProps
